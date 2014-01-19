@@ -9,7 +9,6 @@ define([
     'use strict';
 
     var HomeIndexView = Backbone.View.extend({
-        className: 'jumbotron masthead',
 
         template: JST['app/scripts/templates/home/index.ejs'],
 
