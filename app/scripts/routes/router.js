@@ -3,11 +3,12 @@
 define([
     'jquery',
     'backbone',
+    'collections/news',
     'views/home/index',
     'views/events/index',
     'views/news/index',
     'views/contact',
-], function ($, Backbone, HomeView, EventsView, NewsView, ContactView) {
+], function ($, Backbone, NewsCollection, HomeView, EventsView, NewsView, ContactView) {
     'use strict';
 
     var RouterRouter = Backbone.Router.extend({
@@ -21,10 +22,11 @@ define([
 
         initialize: function(options) {
             this.container = options.container;
+            this.news = new NewsCollection();
         },
 
         showHome: function() {
-            var view = new HomeView();
+            var view = new HomeView({news: this.news});
             this.container.setView(view.render());
         },
 
@@ -34,7 +36,7 @@ define([
         },
 
         showNews: function() {
-            var view = new NewsView();
+            var view = new NewsView({collection: this.news});
             this.container.setView(view.render());
         },
 

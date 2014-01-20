@@ -14,10 +14,14 @@ define([
 
         template: JST['app/scripts/templates/home/index.ejs'],
 
+        initialize: function(options) {
+            this.news = options.news;
+        },
+
         render: function() {
             this.$el.html( this.template( this ) );
 
-            var newsView = new NewsItemView();
+            var newsView = new NewsItemView({model: this.news.at(0)});
             this.insertView(newsView.render(), '#news-item');
 
             var eventsView = new EventsItemView();

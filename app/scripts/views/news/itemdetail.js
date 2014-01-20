@@ -8,8 +8,10 @@ define([
 ], function ($, _, Backbone, JST) {
     'use strict';
 
-    var HomeNewsitemView = Backbone.View.extend({
-        template: JST['app/scripts/templates/home/newsitem.ejs'],
+    var NewsItemdetailView = Backbone.View.extend({
+        tagName: 'tr',
+
+        template: JST['app/scripts/templates/news/itemdetail.ejs'],
 
         render: function() {
             this.$el.html( this.template( this.model.toJSON() ) );
@@ -17,5 +19,5 @@ define([
         },
     });
 
-    return HomeNewsitemView;
+    return NewsItemdetailView;
 });
