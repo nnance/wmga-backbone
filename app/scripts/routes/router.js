@@ -4,15 +4,17 @@ define([
     'jquery',
     'backbone',
     'views/home/index',
+    'views/events/index',
     'views/contact',
-], function ($, Backbone, HomeView, ContactView) {
+], function ($, Backbone, HomeView, EventsView, ContactView) {
     'use strict';
 
     var RouterRouter = Backbone.Router.extend({
         routes: {
-            "": "showHome",
-            "home": "showHome",
-            "contact": "showContact"
+            '': 'showHome',
+            'home': 'showHome',
+            'events': 'showEvents',
+            'contact': 'showContact'
         },
 
         initialize: function(options) {
@@ -21,6 +23,11 @@ define([
 
         showHome: function() {
             var view = new HomeView();
+            this.container.setView(view.render());
+        },
+
+        showEvents: function() {
+            var view = new EventsView();
             this.container.setView(view.render());
         },
 

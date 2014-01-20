@@ -19,7 +19,7 @@ define([
             postRender: function() {
                 this.$('#sidebar').affix({
                     offset: {
-                        top: this.$('#sidebar').offset().top - 25
+                        top: this.$('#sidebar').offset().top - 50
                     }
                 });
             }

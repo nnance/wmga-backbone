@@ -29,7 +29,10 @@ define([
         highlighItem: function(route, params) {
             this.$('.active').removeClass('active');
             var hash = (window.location.hash.length === 0) ? '#home' : window.location.hash;
-            this.$('a[href="' + hash + '"]').parent().addClass('active');
+            var item = this.$('a[href="' + hash + '"]');
+            if (item.parent().parent().hasClass('dropdown-menu'))
+                item = item.parent().parent();
+            item.parent().addClass('active');
         }
 
     });
