@@ -4,8 +4,10 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
-], function ($, _, Backbone, JST) {
+    'templates',
+    'views/home/newsitem',
+    'views/home/eventsitem'
+], function ($, _, Backbone, JST, NewsItemView, EventsItemView) {
     'use strict';
 
     var HomeIndexView = Backbone.View.extend({
@@ -14,6 +16,12 @@ define([
 
         render: function() {
             this.$el.html( this.template( this ) );
+
+            var newsView = new NewsItemView();
+            this.insertView(newsView.render(), '#news-item');
+
+            var eventsView = new EventsItemView();
+            this.insertView(eventsView.render(), '#events-item');
             return this;
         },
     });
