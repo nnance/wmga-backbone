@@ -5,8 +5,9 @@ define([
     'backbone',
     'views/home/index',
     'views/events/index',
+    'views/news/index',
     'views/contact',
-], function ($, Backbone, HomeView, EventsView, ContactView) {
+], function ($, Backbone, HomeView, EventsView, NewsView, ContactView) {
     'use strict';
 
     var RouterRouter = Backbone.Router.extend({
@@ -14,6 +15,7 @@ define([
             '': 'showHome',
             'home': 'showHome',
             'events': 'showEvents',
+            'news': 'showNews',
             'contact': 'showContact'
         },
 
@@ -28,6 +30,11 @@ define([
 
         showEvents: function() {
             var view = new EventsView();
+            this.container.setView(view.render());
+        },
+
+        showNews: function() {
+            var view = new NewsView();
             this.container.setView(view.render());
         },
 
