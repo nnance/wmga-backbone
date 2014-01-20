@@ -9,8 +9,6 @@ define([
     'use strict';
 
     var FooterView = Backbone.View.extend({
-        className: 'footer container',
-
         template: JST['app/scripts/templates/footer.ejs'],
 
         render: function() {
