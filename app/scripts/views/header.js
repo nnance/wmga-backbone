@@ -18,7 +18,7 @@ define([
         template: JST['app/scripts/templates/header.ejs'],
 
         initialize: function(options) {
-            this.listenTo(options.router, 'route', this.highlighItem);
+            this.listenTo(Backbone.history, 'route', this.highlighItem);
         },
 
         render: function() {
@@ -26,9 +26,13 @@ define([
             return this;
         },
 
-        highlighItem: function(route, params) {
+        highlighItem: function(router, route, params) {
             this.$('.active').removeClass('active');
+
             var hash = (window.location.hash.length === 0) ? '#home' : window.location.hash;
+            if (hash.indexOf('/') > 0)
+                hash = hash.split('/')[0];
+
             var item = this.$('a[href="' + hash + '"]');
             if (item.parent().parent().hasClass('dropdown-menu'))
                 item = item.parent().parent();
