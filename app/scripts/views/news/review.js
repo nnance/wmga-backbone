@@ -9,7 +9,7 @@ define([
     'use strict';
 
     var NewsDetailView = Backbone.View.extend({
-        template: JST['app/scripts/templates/news/detail.ejs'],
+        template: JST['app/scripts/templates/news/review.ejs'],
 
         events: {
             'click #delete-btn': 'showDeleteConfirm',

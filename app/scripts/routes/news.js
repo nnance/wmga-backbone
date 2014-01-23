@@ -6,9 +6,9 @@ define([
     'models/news',
     'views/news/index',
     'views/news/list',
-    'views/news/detail',
+    'views/news/review',
     'views/news/form',
-], function ($, Backbone, NewsModel, IndexView, ListView, DetailView, FormView) {
+], function ($, Backbone, NewsModel, IndexView, ListView, ReviewView, FormView) {
     'use strict';
 
     var RouterRouter = Backbone.Router.extend({
@@ -34,7 +34,7 @@ define([
         },
 
         showArticle: function(id) {
-            this.showView(new DetailView({model: this.news.get(id)}));
+            this.showView(new ReviewView({model: this.news.get(id)}));
         },
 
         showAddForm: function() {

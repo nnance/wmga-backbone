@@ -13,5 +13,14 @@
 <br><br>
 <table class="table">
     <tbody id="article-list">
+        <% collection.forEach(function(item) { %>
+            <tr>
+                <td style="width: 10%"><b><%= item.get('itemdate') %></b></td>
+                <td><a href="#news/read/<%=item.id%>"><%= item.get('title') %></a></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="well"><%= item.get('description') %></td>
+            </tr>
+        <% }); %>
     </tbody>
 </table>
