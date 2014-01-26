@@ -1,0 +1,7 @@
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+<strong>Warning!</strong>
+<ul>
+    <% _.each(errors, function(item) { %>
+    <li><%= item %></li>
+    <% }); %>
+</ul>

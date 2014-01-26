@@ -4,8 +4,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
-], function ($, _, Backbone, JST) {
+    'templates',
+    'views/news/delete'
+], function ($, _, Backbone, JST, DeleteView) {
     'use strict';
 
     var NewsDetailView = Backbone.View.extend({
@@ -13,22 +14,17 @@ define([
 
         events: {
             'click #delete-btn': 'showDeleteConfirm',
-            'click #delete-confirm': 'deleteConfirmed'
         },
 
         render: function() {
-            this.$el.html( this.template( this.model.toJSON() ) );
+            this.$el.html( this.template( this ) );
             return this;
         },
 
         showDeleteConfirm: function() {
-            this.$('.modal').modal('show');
-        },
-
-        deleteConfirmed: function() {
-            // TODO: implemenet delete
-            this.$('.modal').modal('hide');
-            Backbone.history.navigate('#news', true);
+            var view = new DeleteView({model: this.model});
+            this.$el.append(view.render().el);
+            view.show();
         }
     });
 

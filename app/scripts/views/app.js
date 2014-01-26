@@ -32,6 +32,15 @@ define([
             this.insertView(this.header.render());
             this.insertView(this.container.render());
             this.insertView(this.footer.render());
+        },
+
+        initSession: function() {
+            var newsFetch = this.news.fetch();
+
+            // can add multiple params to when to wait for all the fetchs to complete
+            $.when(newsFetch).then(function(){
+                Backbone.history.start();
+            });
         }
     });
 

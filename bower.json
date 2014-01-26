@@ -11,7 +11,10 @@
     "modernizr": "~2.6.2",
     "backbone.viewmanager": "https://github.com/nnance/backbone.viewmanager.git",
     "backbone.stickit": "~0.7.0",
-    "backbone.localstorage": "~1.1.7"
+    "backbone.localstorage": "~1.1.7",
+    "jquery.ui": "~1.10.4",
+    "jquery-ui-bootstrap": "https://github.com/jquery-ui-bootstrap/jquery-ui-bootstrap.git",
+    "backbone.validation": "~0.7.1"
   },
   "devDependencies": {}
 }

@@ -1,25 +1,8 @@
 <div class="btn-toolbar pull-right">
-  <a href="#news/update/<%= id %>" class="btn btn-default"> Edit Article</a>
+  <a href="#news/update/<%= model.id %>" class="btn btn-default"> Edit Article</a>
   <a id="delete-btn" class="btn btn-default"> Delete Article</a>
 </div>
-<h3><%= title %></h3>
-<h4><%= itemdate %></h4>
-<p><%= description %></p>
-<p>Attached file: <a href="../attachments/<%= attachedfile %>"><%= attachedfile %></a>
-<div class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="delete-confirm">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<h3><%= model.get('title') %></h3>
+<h4><%= model.get('itemdate') %></h4>
+<p><%= model.get('text') %></p>
+<p>Attached file: <a href="../attachments/<%= model.get('attachedfile') %>"><%= model.get('attachedfile') %></a>

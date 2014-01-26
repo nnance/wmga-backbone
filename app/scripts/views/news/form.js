@@ -5,8 +5,15 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'backbone.stickit'
-], function ($, _, Backbone, JST, BBStickit) {
+    'backbone.viewmanager',
+    'backbone.stickit',
+    'backbone.validation',
+    'jqueryui/jquery.ui.core',
+    'jqueryui/jquery.ui.widget',
+    'jqueryui/jquery.ui.button',
+    'jqueryui/jquery.ui.datepicker',
+    'views/alert'
+], function ($, _, Backbone, JST, BBViewManager, BBStickit, BBValidation, JQCore, JQWidget, JQButton, JQDatePicker, AlertView) {
     'use strict';
 
     var NewsFormView = Backbone.View.extend({
@@ -19,22 +26,45 @@ define([
 
         bindings: {
             '#title': 'title',
-            '#description': 'description',
+            '#text': 'text',
             '#itemdate': 'itemdate',
-            '#itemtime': 'itemtime'
+        },
+
+        initialize: function() {
+            Backbone.Validation.bind(this);
+            this.listenTo(this.model, 'validated:invalid', this.handleErrors);
         },
 
         render: function() {
             this.$el.html( this.template( this ) );
+            this.$('#itemdate').datepicker();
             this.stickit();
             return this;
         },
 
+        handleErrors: function(model, errors) {
+            var alertView = new AlertView({errors: errors});
+            this.insertView(alertView.render(), '#alert');
+            for (var key in errors) {
+                this.$('#' + key).parent().addClass('has-error');
+            }
+        },
+
         saveButton: function() {
-            //TODO: must impliment
-            if (!this.model.id)
-                this.collection.add(this.model);
-            Backbone.history.navigate('#news', true);
+            //TODO: add save
+            this.removeSubViews();
+            if (this.model.isValid(true)) {
+                if (this.model.isNew())
+                    this.collection.add(this.model);
+                this.model.save({},{
+                    success: function(model, response, options) {
+                        Backbone.history.navigate('#news', true);
+                    },
+                    error: function(model, xhr, options) {
+                        model.trigger('validated:invalid',model,{response: xhr.responseText});
+                    }
+                });
+            }
         },
 
         cancelButton: function() {
