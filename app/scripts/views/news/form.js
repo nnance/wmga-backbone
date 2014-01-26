@@ -33,6 +33,8 @@ define([
         initialize: function() {
             Backbone.Validation.bind(this);
             this.listenTo(this.model, 'validated:invalid', this.handleErrors);
+            this.listenTo(this.model, 'sync', this.saveCompleted);
+            this.listenTo(this.model, 'error', this.saveFailed);
         },
 
         render: function() {
@@ -51,20 +53,18 @@ define([
         },
 
         saveButton: function() {
-            //TODO: add save
             this.removeSubViews();
-            if (this.model.isValid(true)) {
-                if (this.model.isNew())
-                    this.collection.add(this.model);
-                this.model.save({},{
-                    success: function(model, response, options) {
-                        Backbone.history.navigate('#news', true);
-                    },
-                    error: function(model, xhr, options) {
-                        model.trigger('validated:invalid',model,{response: xhr.responseText});
-                    }
-                });
-            }
+            if (this.model.isValid(true))
+                this.model.save();
+        },
+
+        saveCompleted: function(model, response, options) {
+            this.collection.add(model);
+            Backbone.history.navigate('#news', true);
+        },
+
+        saveFailed: function(model, xhr, options) {
+            model.trigger('validated:invalid',model,{response: xhr.responseText});
         },
 
         cancelButton: function() {

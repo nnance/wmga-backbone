@@ -3,13 +3,16 @@
 define([
     'underscore',
     'backbone',
-    'backbone.validation'
-    ], function (_, Backbone, BBValidation) {
+    'backbone.validation',
+    'appsettings'
+    ], function (_, Backbone, BBValidation, AppSettings) {
         'use strict';
 
         var NewsModel = Backbone.Model.extend({
 
             idAttribute: '_id',
+
+            urlRoot: AppSettings.baseURL + '/rest/articles',
 
             validation: {
                 title: {
