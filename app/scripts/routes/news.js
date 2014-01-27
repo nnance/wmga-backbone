@@ -11,7 +11,7 @@ define([
 ], function ($, Backbone, NewsModel, IndexView, ListView, ReviewView, FormView) {
     'use strict';
 
-    var RouterRouter = Backbone.Router.extend({
+    var NewsRouter = Backbone.Router.extend({
         routes: {
             'news': 'showNews',
             'news/create': 'showAddForm',
@@ -46,5 +46,5 @@ define([
         },
     });
 
-    return RouterRouter;
+    return NewsRouter;
 });
