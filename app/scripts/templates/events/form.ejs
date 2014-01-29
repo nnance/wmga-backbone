@@ -1,0 +1,64 @@
+<form method="POST" role="form">
+    <h3 id="formtitle">Add new event</h3>
+    <div id="alert"></div>
+    <fieldset>
+        <legend>Summary</legend>
+        <div class="form-group">
+            <label>Event Title:</label>
+            <input class="form-control" type="text" id="title"/>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea rows="5" class="form-control" id="descirption"></textarea>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Details</legend>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label >Start Date</label>
+                    <input class="form-control" type="text" id="startdate">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label >Start Time</label>
+                    <input class="form-control" type="text" id="starttime">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label >End Date</label>
+                    <input class="form-control" type="text" id="enddate">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label >End Time</label>
+                    <input class="form-control" type="text" id="endtime">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Attach File</legend>
+        <div class="form-group">
+            <label for="exampleInputFile">File Name</label>
+            <input type="file" id="exampleInputFile">
+        </div>
+    </fieldset>
+    <div class="form-actions">
+        <a id="save-button" class="btn btn-primary">Save changes</a>
+        <a id="cancel-button" class="btn btn-default">Cancel</a>
+    </div>
+</form>
+<div class="row status-bar">
+    <div class="span9">
+        <div class="alert alert-success" style="display: none">
+            <b>Success!</b> Record saved successfully
+        </div>
+    </div>
+</div>
