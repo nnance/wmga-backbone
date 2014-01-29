@@ -17,20 +17,30 @@ require.config({
             deps: ['jquery'],
             exports: 'jquery'
         },
-        jqueryui: {
+        'jquery.ui/jquery.ui.core': {
             deps: ['jquery']
-        }
+        },
+        'jquery.ui/jquery.ui.widget': {
+            deps: ['jquery.ui/jquery.ui.core']
+        },
+        'jquery.ui/jquery.ui.button': {
+            deps: ['jquery.ui/jquery.ui.widget']
+        },
+        'jquery.ui/jquery.ui.datepicker': {
+            deps: ['jquery.ui/jquery.ui.button']
+        },
     },
     paths: {
         jquery: '../bower_components/jquery/jquery',
-        jqueryui: '../bower_components/jquery.ui/ui',
+        'jquery.ui': '../bower_components/jquery.ui/ui',
         backbone: '../bower_components/backbone/backbone',
         underscore: '../bower_components/underscore/underscore',
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
         'backbone.localstorage': '../bower_components/backbone.localstorage/backbone.localstorage',
         'backbone.stickit': '../bower_components/backbone.stickit/backbone.stickit',
         'backbone.viewmanager': '../bower_components/backbone.viewmanager/backbone.viewmanager',
-        'backbone.validation': '../bower_components/backbone.validation/src/backbone-validation'
+        'backbone.validation': '../bower_components/backbone.validation/src/backbone-validation',
+        moment: '../bower_components/moment/moment'
     }
 });
 

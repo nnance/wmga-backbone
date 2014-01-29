@@ -3,6 +3,6 @@
   <a id="delete-btn" class="btn btn-default"> Delete Article</a>
 </div>
 <h3><%= model.get('title') %></h3>
-<h4><%= model.get('itemdate') %></h4>
+<h4><%= model.dateAsString('itemdate') %></h4>
 <p><%= model.get('text') %></p>
 <p>Attached file: <a href="../attachments/<%= model.get('attachedfile') %>"><%= model.get('attachedfile') %></a>

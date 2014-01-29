@@ -42,7 +42,7 @@ define([
         },
 
         showEditForm: function(id) {
-            this.showView(new FormView({model: this.news.get(id)}));
+            this.showView(new FormView({model: this.news.get(id), collection: this.news}));
         },
     });
 

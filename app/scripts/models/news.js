@@ -1,16 +1,12 @@
 /*global define*/
 
 define([
-    'underscore',
-    'backbone',
-    'backbone.validation',
+    'models/base',
     'appsettings'
-    ], function (_, Backbone, BBValidation, AppSettings) {
+    ], function (BaseModel, AppSettings) {
         'use strict';
 
-        var NewsModel = Backbone.Model.extend({
-
-            idAttribute: '_id',
+        var NewsModel = BaseModel.extend({
 
             urlRoot: AppSettings.baseURL + '/rest/articles',
 
@@ -24,12 +20,8 @@ define([
             },
 
             defaults: function() {
-                var currentDate = new Date();
-                var day = currentDate.getDate();
-                var month = currentDate.getMonth() + 1;
-                var year = currentDate.getFullYear();
                 return {
-                    itemdate:  month + '/' + day + '/' + year
+                    itemdate:  this.now()
                 }
             }
         });

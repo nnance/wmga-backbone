@@ -13,7 +13,6 @@ define([
         routes: {
             '': 'showHome',
             'home': 'showHome',
-            'events': 'showEvents',
             'contact': 'showContact'
         },
 
@@ -24,11 +23,6 @@ define([
 
         showHome: function() {
             var view = new HomeView({news: this.news});
-            this.container.setView(view.render());
-        },
-
-        showEvents: function() {
-            var view = new EventsView();
             this.container.setView(view.render());
         },
 
