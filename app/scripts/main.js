@@ -17,22 +17,18 @@ require.config({
             deps: ['jquery'],
             exports: 'jquery'
         },
-        'jquery.ui/jquery.ui.core': {
+        'bootstrap.datetimepicker': {
+            deps: [
+                'jquery',
+                'moment'
+            ]
+        },
+        select2: {
             deps: ['jquery']
-        },
-        'jquery.ui/jquery.ui.widget': {
-            deps: ['jquery.ui/jquery.ui.core']
-        },
-        'jquery.ui/jquery.ui.button': {
-            deps: ['jquery.ui/jquery.ui.widget']
-        },
-        'jquery.ui/jquery.ui.datepicker': {
-            deps: ['jquery.ui/jquery.ui.button']
-        },
+        }
     },
     paths: {
         jquery: '../bower_components/jquery/jquery',
-        'jquery.ui': '../bower_components/jquery.ui/ui',
         backbone: '../bower_components/backbone/backbone',
         underscore: '../bower_components/underscore/underscore',
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
@@ -40,7 +36,9 @@ require.config({
         'backbone.stickit': '../bower_components/backbone.stickit/backbone.stickit',
         'backbone.viewmanager': '../bower_components/backbone.viewmanager/backbone.viewmanager',
         'backbone.validation': '../bower_components/backbone.validation/src/backbone-validation',
-        moment: '../bower_components/moment/moment'
+        moment: '../bower_components/moment/moment',
+        'bootstrap.datetimepicker': '../bower_components/bootstrap3-datetimepicker/src/js/bootstrap-datetimepicker',
+        select2: '../bower_components/select2/select2'
     }
 });
 

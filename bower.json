@@ -12,10 +12,11 @@
     "backbone.viewmanager": "https://github.com/nnance/backbone.viewmanager.git",
     "backbone.stickit": "~0.7.0",
     "backbone.localstorage": "~1.1.7",
-    "jquery.ui": "~1.10.4",
-    "jquery-ui-bootstrap": "https://github.com/jquery-ui-bootstrap/jquery-ui-bootstrap.git",
     "backbone.validation": "~0.7.1",
-    "moment": "~2.5.1"
+    "moment": "~2.5.1",
+    "bootstrap3-datetimepicker": "~2.1.30",
+    "select2": "~3.4.5",
+    "select2-bootstrap3-css": "~1.2.0"
   },
   "devDependencies": {}
 }

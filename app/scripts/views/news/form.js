@@ -2,8 +2,8 @@
 
 define([
     'views/formbase',
-    'jquery.ui/jquery.ui.datepicker',
-], function (FormBaseView, JQDatePicker) {
+    'bootstrap.datetimepicker',
+], function (FormBaseView, BSDateTimePicker) {
     'use strict';
 
     var NewsFormView = FormBaseView.extend({
@@ -33,7 +33,9 @@ define([
 
         render: function() {
             this.$el.html( this.template( this ) );
-            this.$('#itemdate').datepicker();
+            this.$('#itemdate').datetimepicker({
+                pickTime: false
+            });
             this.stickit();
             return this;
         },
