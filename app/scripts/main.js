@@ -38,6 +38,7 @@ require.config({
         'backbone.validation': '../bower_components/backbone.validation/src/backbone-validation',
         moment: '../bower_components/moment/moment',
         'bootstrap.datetimepicker': '../bower_components/bootstrap3-datetimepicker/src/js/bootstrap-datetimepicker',
+        'bootstrap.filestyle': '../bower_components/bootstrap-filestyle/src/bootstrap-filestyle',
         select2: '../bower_components/select2/select2'
     }
 });

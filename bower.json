@@ -16,7 +16,8 @@
     "moment": "~2.5.1",
     "bootstrap3-datetimepicker": "~2.1.30",
     "select2": "~3.4.5",
-    "select2-bootstrap3-css": "~1.2.0"
+    "select2-bootstrap3-css": "~1.2.0",
+    "bootstrap-filestyle": "~1.0.3"
   },
   "devDependencies": {}
 }

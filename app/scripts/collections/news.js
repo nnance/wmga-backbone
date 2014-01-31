@@ -11,7 +11,9 @@ define([
     var NewsCollection = Backbone.Collection.extend({
         url: AppSettings.baseURL + '/rest/articles',
 
-        model: NewsModel
+        model: NewsModel,
+
+        comparator: 'itemdate'
     });
 
     return NewsCollection;

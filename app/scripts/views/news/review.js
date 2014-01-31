@@ -5,8 +5,9 @@ define([
     'underscore',
     'backbone',
     'templates',
+    'appsettings',
     'views/news/delete'
-], function ($, _, Backbone, JST, DeleteView) {
+], function ($, _, Backbone, JST, AppSettings, DeleteView) {
     'use strict';
 
     var NewsDetailView = Backbone.View.extend({
@@ -17,7 +18,7 @@ define([
         },
 
         render: function() {
-            this.$el.html( this.template( this ) );
+            this.$el.html( this.template( {model: this.model, AppSettings: AppSettings} ) );
             return this;
         },
 
