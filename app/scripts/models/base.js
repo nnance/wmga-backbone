@@ -13,6 +13,10 @@ define([
 
             idAttribute: '_id',
 
+            getAsDate: function(attribute) {
+                return moment(this.get(attribute));
+            },
+
             dateAsString: function(attribute) {
                 return this.formatDate(this.get(attribute));
             },
