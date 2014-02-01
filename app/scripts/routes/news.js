@@ -17,6 +17,7 @@ define([
             'news/create': 'showAddForm',
             'news/read/:id': 'showArticle',
             'news/update/:id': 'showEditForm',
+            'news/filter/:value': 'showNews'
         },
 
         initialize: function(options) {
@@ -29,8 +30,8 @@ define([
             this.container.setView(view.render());
         },
 
-        showNews: function() {
-            this.showView(new ListView({collection: this.news}));
+        showNews: function(filter) {
+            this.showView(new ListView({collection: this.news, filter: filter}));
         },
 
         showArticle: function(id) {
