@@ -13,7 +13,9 @@ define([
 
         model: NewsModel,
 
-        comparator: 'itemdate'
+        comparator: function (a, b) {
+            return a.get('itemdate') > b.get('itemdate') ? -1 : 1;
+        }
     });
 
     return NewsCollection;

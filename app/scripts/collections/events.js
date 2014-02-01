@@ -11,7 +11,12 @@ define([
     var EventsCollection = Backbone.Collection.extend({
         url: AppSettings.baseURL + '/rest/events',
 
-        model: EventsModel
+        model: EventsModel,
+
+        comparator: function (a, b) {
+            return a.get('startdate') > b.get('startdate') ? -1 : 1;
+        }
+
     });
 
     return EventsCollection;
