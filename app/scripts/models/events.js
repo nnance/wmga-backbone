@@ -23,6 +23,9 @@ define([
                 },
                 description: {
                     required: true
+                },
+                startdate: {
+                    required: true
                 }
             },
 

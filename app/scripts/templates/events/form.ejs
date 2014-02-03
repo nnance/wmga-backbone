@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             <label>Description</label>
-            <textarea rows="5" class="form-control" id="descirption"></textarea>
+            <textarea rows="5" class="form-control" id="description"></textarea>
         </div>
     </fieldset>
     <fieldset>
@@ -18,27 +18,23 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label >Start Date</label>
-                    <input class="form-control" type="text" id="startdate">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label >Start Time</label>
-                    <input class="form-control" type="text" id="starttime">
+                    <div class="input-group" id="startdatepicker">
+                        <input class="form-control" type="text" id="startdate">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label >End Date</label>
-                    <input class="form-control" type="text" id="enddate">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label >End Time</label>
-                    <input class="form-control" type="text" id="endtime">
+                    <label >Start Date</label>
+                    <div class="input-group" id="enddatepicker">
+                        <input class="form-control" type="text" id="enddate">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,8 +42,8 @@
     <fieldset>
         <legend>Attach File</legend>
         <div class="form-group">
-            <label for="exampleInputFile">File Name</label>
-            <input type="file" id="exampleInputFile">
+            <label for="attachedfile">File Name</label>
+            <input type="file" id="attachedfile">
         </div>
     </fieldset>
     <div class="form-actions">

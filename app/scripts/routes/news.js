@@ -3,12 +3,11 @@
 define([
     'jquery',
     'backbone',
-    'models/news',
     'views/news/index',
     'views/news/list',
     'views/news/review',
     'views/news/form',
-], function ($, Backbone, NewsModel, IndexView, ListView, ReviewView, FormView) {
+], function ($, Backbone, IndexView, ListView, ReviewView, FormView) {
     'use strict';
 
     var NewsRouter = Backbone.Router.extend({
@@ -39,7 +38,7 @@ define([
         },
 
         showAddForm: function() {
-            this.showView(new FormView({model: new NewsModel(), collection: this.news}));
+            this.showView(new FormView({model: new this.news.model(), collection: this.news}));
         },
 
         showEditForm: function(id) {

@@ -26,6 +26,12 @@ require.config({
         select2: {
             deps: ['jquery']
         },
+        'backbone.validation': {
+            deps: ['backbone']
+        },
+        'bootstrap-filestyle': {
+            deps: ['jquery']
+        },
         'backbone.viewmanager': {
             deps: ['backbone']
         },
@@ -33,6 +39,12 @@ require.config({
             deps: [
                 'backbone',
                 'moment'
+            ]
+        },
+        'backbone.filestyle': {
+            deps: [
+                'backbone',
+                'bootstrap-filestyle'
             ]
         }
     },
@@ -43,13 +55,14 @@ require.config({
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
         'backbone.localstorage': '../bower_components/backbone.localstorage/backbone.localstorage',
         'backbone.stickit': '../bower_components/backbone.stickit/backbone.stickit',
-        'backbone.viewmanager': '../bower_components/backbone-plugins/viewmanager/backbone.viewmanager',
-        'backbone.datetime': '../bower_components/backbone-plugins/modeldatetime/backbone.datetime',
         'backbone.validation': '../bower_components/backbone.validation/src/backbone-validation',
         moment: '../bower_components/moment/moment',
         'bootstrap.datetimepicker': '../bower_components/bootstrap3-datetimepicker/src/js/bootstrap-datetimepicker',
-        'bootstrap.filestyle': '../bower_components/bootstrap-filestyle/src/bootstrap-filestyle',
-        select2: '../bower_components/select2/select2'
+        'bootstrap-filestyle': '../bower_components/bootstrap-filestyle/src/bootstrap-filestyle',
+        select2: '../bower_components/select2/select2',
+        'backbone.viewmanager': '../bower_components/backbone-plugins/viewmanager/backbone.viewmanager',
+        'backbone.datetime': '../bower_components/backbone-plugins/modeldatetime/backbone.datetime',
+        'backbone.filestyle': '../bower_components/backbone-plugins/filestyle/backbone.filestyle',
     }
 });
 

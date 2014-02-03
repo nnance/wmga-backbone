@@ -3,12 +3,11 @@
 define([
     'jquery',
     'backbone',
-    'models/events',
     'views/events/index',
     'views/events/list',
     'views/events/review',
     'views/events/form',
-], function ($, Backbone, EventsModel, IndexView, ListView, ReviewView, FormView) {
+], function ($, Backbone, IndexView, ListView, ReviewView, FormView) {
     'use strict';
 
     var EventsRouter = Backbone.Router.extend({
@@ -38,11 +37,11 @@ define([
         },
 
         showAddForm: function() {
-            this.showView(new FormView({model: new EventsModel(), collection: this.events}));
+            this.showView(new FormView({model: new this.events.model(), collection: this.events}));
         },
 
         showEditForm: function(id) {
-            this.showView(new FormView({model: this.events.get(id)}));
+            this.showView(new FormView({model: this.events.get(id), collection: this.events}));
         },
     });
 

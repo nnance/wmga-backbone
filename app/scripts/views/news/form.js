@@ -3,9 +3,8 @@
 define([
     'views/formbase',
     'bootstrap.datetimepicker',
-    'bootstrap.filestyle',
     'appsettings'
-], function (FormBaseView, BSDateTimePicker, BBFileStyle, AppSettings) {
+], function (FormBaseView, BSDateTimePicker, AppSettings) {
     'use strict';
 
     var NewsFormView = FormBaseView.extend({
@@ -14,7 +13,6 @@ define([
         events: {
             'click #save-button': 'saveButton',
             'click #cancel-button': 'cancelButton',
-            'change #attachedfile': 'prerpareUpload'
         },
 
         bindings: {
@@ -24,10 +22,6 @@ define([
                 observe: 'itemdate',
                 onGet: 'parseDate',
                 onSet: 'convertToDate'
-            },
-            '#attachedfile': {
-                observe: 'attachedfile',
-                onSet: 'prerpareUpload'
             }
         },
 
@@ -43,7 +37,11 @@ define([
             this.$('#itemdatepicker').datetimepicker({
                 pickTime: false
             });
-            this.$('#attachedfile').filestyle();
+            this.filestyle({
+                selector: '#attachedfile',
+                binding: 'attachedfile',
+                classButton: 'btn btn-default'
+            });
             this.stickit();
             return this;
         },

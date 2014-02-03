@@ -3,7 +3,8 @@
 define([
     'views/formbase',
     'bootstrap.datetimepicker',
-], function (FormBaseView, BSDateTimePicker) {
+    'appsettings'
+], function (FormBaseView, BSDateTimePicker, AppSettings) {
     'use strict';
 
     var EventsFormView = FormBaseView.extend({
@@ -16,9 +17,14 @@ define([
 
         bindings: {
             '#title': 'title',
-            '#text': 'text',
+            '#description': 'description',
             '#startdate': {
                 observe: 'startdate',
+                onGet: 'parseDate',
+                onSet: 'convertToDate'
+            },
+            '#enddate': {
+                observe: 'enddate',
                 onGet: 'parseDate',
                 onSet: 'convertToDate'
             }
@@ -33,14 +39,20 @@ define([
 
         render: function() {
             this.$el.html( this.template( this ) );
-            this.$('#itemdate').datetimepicker();
+            this.$('#startdate').datetimepicker();
+            this.$('#enddate').datetimepicker();
+            this.filestyle({
+                selector: '#attachedfile',
+                binding: 'attachedfile',
+                classButton: 'btn btn-default'
+            });
             this.stickit();
             return this;
         },
 
         saveCompleted: function(model, response, options) {
             this.collection.add(model);
-            Backbone.history.navigate('#news', true);
+            Backbone.history.navigate('#events', true);
         }
 
     });
