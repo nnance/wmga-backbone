@@ -25,6 +25,15 @@ require.config({
         },
         select2: {
             deps: ['jquery']
+        },
+        'backbone.viewmanager': {
+            deps: ['backbone']
+        },
+        'backbone.datetime': {
+            deps: [
+                'backbone',
+                'moment'
+            ]
         }
     },
     paths: {
@@ -34,7 +43,8 @@ require.config({
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
         'backbone.localstorage': '../bower_components/backbone.localstorage/backbone.localstorage',
         'backbone.stickit': '../bower_components/backbone.stickit/backbone.stickit',
-        'backbone.viewmanager': '../bower_components/backbone.viewmanager/backbone.viewmanager',
+        'backbone.viewmanager': '../bower_components/backbone-plugins/viewmanager/backbone.viewmanager',
+        'backbone.datetime': '../bower_components/backbone-plugins/modeldatetime/backbone.datetime',
         'backbone.validation': '../bower_components/backbone.validation/src/backbone-validation',
         moment: '../bower_components/moment/moment',
         'bootstrap.datetimepicker': '../bower_components/bootstrap3-datetimepicker/src/js/bootstrap-datetimepicker',

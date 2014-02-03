@@ -1,12 +1,19 @@
 /*global define*/
 
 define([
-    'models/base',
+    'underscore',
+    'backbone',
+    'backbone.validation',
+    'backbone.datetime',
     'appsettings'
-    ], function (BaseModel, AppSettings) {
+    ], function (_, Backbone, BBValidation, BBDateTime, AppSettings) {
         'use strict';
 
-        var EventsModel = BaseModel.extend({
+        var EventsModel = Backbone.Model.extend({
+
+            idAttribute: '_id',
+
+            dateFormat: AppSettings.dateFormat,
 
             urlRoot: AppSettings.baseURL + '/rest/events',
 

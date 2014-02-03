@@ -9,7 +9,6 @@
     "requirejs": "~2.1.5",
     "requirejs-text": "~2.0.5",
     "modernizr": "~2.6.2",
-    "backbone.viewmanager": "https://github.com/nnance/backbone.viewmanager.git",
     "backbone.stickit": "~0.7.0",
     "backbone.localstorage": "~1.1.7",
     "backbone.validation": "~0.7.1",
@@ -17,7 +16,8 @@
     "bootstrap3-datetimepicker": "~2.1.30",
     "select2": "~3.4.5",
     "select2-bootstrap3-css": "~1.2.0",
-    "bootstrap-filestyle": "~1.0.3"
+    "bootstrap-filestyle": "~1.0.3",
+    "backbone-plugins": "https://github.com/nnance/backbone-plugins.git"
   },
   "devDependencies": {}
 }
