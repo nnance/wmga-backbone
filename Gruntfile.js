@@ -51,7 +51,7 @@ module.exports = function (grunt) {
                 files: [
                     '<%= yeoman.app %>/*.html',
                     '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+                    '{.tmp,<%= yeoman.app %>}/scripts/{,**/}*.js',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                     '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}',
                     'test/spec/**/*.js'
@@ -59,14 +59,14 @@ module.exports = function (grunt) {
             },
             jst: {
                 files: [
-                    '<%= yeoman.app %>/scripts/templates/{,*/}*.ejs'
+                    '<%= yeoman.app %>/scripts/templates/{,**/}*.ejs'
                 ],
                 tasks: ['jst']
             },
-            test: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
-                tasks: ['test']
-            }
+            // test: {
+            //     files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
+            //     tasks: ['test']
+            // }
         },
         connect: {
             options: {
