@@ -9,7 +9,7 @@ define([
 ], function ($, _, Backbone, JST, AlertView) {
     'use strict';
 
-    var EventsDetailView = Backbone.View.extend({
+    var EventsDeleteView = Backbone.View.extend({
         className: 'modal fade',
 
         template: JST['app/scripts/templates/events/delete.ejs'],
@@ -52,5 +52,5 @@ define([
         }
     });
 
-    return EventsDetailView;
+    return EventsDeleteView;
 });

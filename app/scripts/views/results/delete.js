@@ -9,7 +9,7 @@ define([
 ], function ($, _, Backbone, JST, AlertView) {
     'use strict';
 
-    var ResultsDetailView = Backbone.View.extend({
+    var ResultsDeleteView = Backbone.View.extend({
         className: 'modal fade',
 
         template: JST['app/scripts/templates/results/delete.ejs'],
@@ -52,5 +52,5 @@ define([
         }
     });
 
-    return ResultsDetailView;
+    return ResultsDeleteView;
 });
