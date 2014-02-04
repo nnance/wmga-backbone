@@ -1,0 +1,12 @@
+<div class="btn-toolbar pull-right">
+  <a href="#users/update/<%= model.id %>" class="btn btn-default"> Edit User</a>
+  <a id="delete-btn" class="btn btn-default"> Delete User</a>
+</div>
+<div class="page-header">
+  <h3>Membership Info</h3>
+</div>
+<h4><%= model.get('firstname') %> <%= model.get('lastname') %></h4>
+<p><%= model.get('address') %><br>
+<%= model.get('address2') %></p>
+<abbr title="Phone">P:</abbr> <%= model.get('phone') %><br>
+<p>Attached file: <a href="<%= getFileUrl() %>"><%= model.get('attachedfile') %></a>
