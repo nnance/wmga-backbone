@@ -18,11 +18,12 @@ define([
 
         initialize: function(options) {
             this.container = options.container;
-            this.news = options.news;
+            this.newsCollection = options.newsCol;
+            this.eventsCollection = options.eventsCol;
         },
 
         showHome: function() {
-            var view = new HomeView({news: this.news});
+            var view = new HomeView({newsCol: this.newsCollection, eventsCol: this.eventsCollection});
             this.container.setView(view.render());
         },
 

@@ -15,23 +15,32 @@ define([
         template: JST['app/scripts/templates/home/index.ejs'],
 
         initialize: function(options) {
-            this.news = options.news;
-            this.listenTo(this.news, 'sync', this.renderNews);
+            this.newsCollection = options.newsCol;
+            this.eventsCollection = options.eventsCol;
+            this.listenTo(this.newsCollection, 'sync', this.renderNews);
+            this.listenTo(this.eventsCollection, 'sync', this.renderEvent);
         },
 
         render: function() {
             this.$el.html( this.template( this ) );
             this.renderNews();
-            var eventsView = new EventsItemView();
-            this.insertView(eventsView.render(), '#events-item');
+            this.renderEvent();
             return this;
         },
 
         renderNews: function() {
-            var recentArticle = this.news.at(0);
+            var recentArticle = this.newsCollection.at(0);
             if (recentArticle) {
                 var newsView = new NewsItemView({model: recentArticle});
                 this.insertView(newsView.render(), '#news-item');
+            }
+        },
+
+        renderEvent: function() {
+            var recentEvent = this.eventsCollection.at(0);
+            if (recentEvent) {
+                var eventsView = new EventsItemView({model: recentEvent});
+                this.insertView(eventsView.render(), '#events-item');
             }
         }
     });

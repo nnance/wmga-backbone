@@ -21,7 +21,7 @@ define([
 
         initialize: function(options) {
             this.container = options.container;
-            this.news = options.news;
+            this.newsCollection = options.newsCol;
         },
 
         showView: function(view) {
@@ -30,19 +30,19 @@ define([
         },
 
         showNews: function(filter) {
-            this.showView(new ListView({collection: this.news, filter: filter}));
+            this.showView(new ListView({collection: this.newsCollection, filter: filter}));
         },
 
         showArticle: function(id) {
-            this.showView(new ReviewView({model: this.news.get(id)}));
+            this.showView(new ReviewView({model: this.newsCollection.get(id)}));
         },
 
         showAddForm: function() {
-            this.showView(new FormView({model: new this.news.model(), collection: this.news}));
+            this.showView(new FormView({model: new this.newsCollection.model(), collection: this.newsCollection}));
         },
 
         showEditForm: function(id) {
-            this.showView(new FormView({model: this.news.get(id), collection: this.news}));
+            this.showView(new FormView({model: this.newsCollection.get(id), collection: this.newsCollection}));
         },
     });
 

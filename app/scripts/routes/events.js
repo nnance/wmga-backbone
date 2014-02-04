@@ -21,7 +21,7 @@ define([
 
         initialize: function(options) {
             this.container = options.container;
-            this.events = options.events;
+            this.eventsCollection = options.eventsCol;
         },
 
         showView: function(view) {
@@ -30,19 +30,19 @@ define([
         },
 
         showEvents: function(filter) {
-            this.showView(new ListView({collection: this.events, filter: filter}));
+            this.showView(new ListView({collection: this.eventsCollection, filter: filter}));
         },
 
         showEvent: function(id) {
-            this.showView(new ReviewView({model: this.events.get(id)}));
+            this.showView(new ReviewView({model: this.eventsCollection.get(id)}));
         },
 
         showAddForm: function() {
-            this.showView(new FormView({model: new this.events.model(), collection: this.events}));
+            this.showView(new FormView({model: new this.eventsCollection.model(), collection: this.eventsCollection}));
         },
 
         showEditForm: function(id) {
-            this.showView(new FormView({model: this.events.get(id), collection: this.events}));
+            this.showView(new FormView({model: this.eventsCollection.get(id), collection: this.eventsCollection}));
         },
     });
 

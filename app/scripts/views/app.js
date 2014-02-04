@@ -23,12 +23,12 @@ define([
             this.container = new ContainterView();
             this.footer = new FooterView();
 
-            this.news = new NewsCollection();
-            this.eventsColl = new EventsCollection();
+            this.newsCollection = new NewsCollection();
+            this.eventsCollection = new EventsCollection();
 
-            this.router = new Router({container: this.container, news: this.news});
-            this.newsRouter = new NewsRouter({container: this.container, news: this.news});
-            this.eventsRouter = new EventsRouter({container: this.container, events: this.eventsColl});
+            this.router = new Router({container: this.container, newsCol: this.newsCollection, eventsCol: this.eventsCollection});
+            this.newsRouter = new NewsRouter({container: this.container, newsCol: this.newsCollection});
+            this.eventsRouter = new EventsRouter({container: this.container, eventsCol: this.eventsCollection});
 
         },
 
@@ -39,8 +39,8 @@ define([
         },
 
         initSession: function() {
-            var newsFetch = this.news.fetch();
-            var eventsFetch = this.eventsColl.fetch();
+            var newsFetch = this.newsCollection.fetch();
+            var eventsFetch = this.eventsCollection.fetch();
 
             $.when(newsFetch, eventsFetch).then(function(){
                 Backbone.history.start();
