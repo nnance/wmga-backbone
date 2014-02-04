@@ -1,0 +1,8 @@
+<div class="btn-toolbar pull-right">
+  <a href="#results/update/<%= model.id %>" class="btn btn-default"> Edit Results</a>
+  <a id="delete-btn" class="btn btn-default"> Delete Results</a>
+</div>
+<h3><%= model.get('title') %></h3>
+<h4><%= model.dateAsString('itemdate') %></h4>
+<p><%= model.get('text') %></p>
+<p>Attached file: <a href="<%= getFileUrl() %>"><%= model.get('attachedfile') %></a>

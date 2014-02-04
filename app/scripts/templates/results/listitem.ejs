@@ -1,0 +1,7 @@
+<div class="row">
+    <div class="col-md-1"><b><%= model.dateAsString('itemdate') %></b></div>
+    <div class="col-md-4"><a href="#results/read/<%= model.id %>"><%= model.get('title') %></a></div>
+</div>
+<div class="row">
+    <div class="col-md-8 well"><%= model.get('text') %></div>
+</div>
