@@ -5,8 +5,9 @@ define([
     'underscore',
     'backbone',
     'templates',
+    'appsettings',
     'views/events/delete'
-], function ($, _, Backbone, JST, DeleteView) {
+], function ($, _, Backbone, JST, AppSettings, DeleteView) {
     'use strict';
 
     var EventsDetailView = Backbone.View.extend({
@@ -19,6 +20,10 @@ define([
         render: function() {
             this.$el.html( this.template( this ) );
             return this;
+        },
+
+        getFileUrl: function() {
+            return AppSettings.baseURL + '/attachments/' + this.model.get('attachedfile');
         },
 
         showDeleteConfirm: function() {

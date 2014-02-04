@@ -18,8 +18,12 @@ define([
         },
 
         render: function() {
-            this.$el.html( this.template( {model: this.model, AppSettings: AppSettings} ) );
+            this.$el.html( this.template( this ) );
             return this;
+        },
+
+        getFileUrl: function() {
+            return AppSettings.baseURL + '/attachments/' + this.model.get('attachedfile');
         },
 
         showDeleteConfirm: function() {

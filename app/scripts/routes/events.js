@@ -16,6 +16,7 @@ define([
             'events/create': 'showAddForm',
             'events/read/:id': 'showEvent',
             'events/update/:id': 'showEditForm',
+            'events/filter/:value': 'showEvents'
         },
 
         initialize: function(options) {
@@ -28,8 +29,8 @@ define([
             this.container.setView(view.render());
         },
 
-        showEvents: function() {
-            this.showView(new ListView({collection: this.events}));
+        showEvents: function(filter) {
+            this.showView(new ListView({collection: this.events, filter: filter}));
         },
 
         showEvent: function(id) {

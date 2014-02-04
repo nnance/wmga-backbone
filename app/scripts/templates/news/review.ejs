@@ -5,4 +5,4 @@
 <h3><%= model.get('title') %></h3>
 <h4><%= model.dateAsString('itemdate') %></h4>
 <p><%= model.get('text') %></p>
-<p>Attached file: <a href="<%= AppSettings.baseURL + '/attachments/' + model.get('attachedfile') %>"><%= model.get('attachedfile') %></a>
+<p>Attached file: <a href="<%= getFileUrl() %>"><%= model.get('attachedfile') %></a>
