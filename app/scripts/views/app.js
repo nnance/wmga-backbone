@@ -4,7 +4,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'backbone.viewmanager',
+    'views/viewbase',
     'routes/router',
     'routes/news',
     'routes/events',
@@ -13,17 +13,16 @@ define([
     'collections/news',
     'collections/events',
     'collections/results',
-    'views/header',
-    'views/container',
-    'views/footer',
-], function ($, _, Backbone, BBViewManager, Router, NewsRouter, EventsRouter, ResultsRouter, UserRouter, NewsCollection, EventsCollection, ResultsCollection, HeaderView, ContainterView, FooterView) {
+    'views/app/header',
+    'views/app/footer',
+], function ($, _, Backbone, BaseView, Router, NewsRouter, EventsRouter, ResultsRouter, UserRouter, NewsCollection, EventsCollection, ResultsCollection, HeaderView, FooterView) {
     'use strict';
 
-    var AppView = Backbone.View.extend({
+    var AppView = BaseView.extend({
         initialize: function() {
 
             this.header = new HeaderView();
-            this.container = new ContainterView();
+            this.container = new BaseView();
             this.footer = new FooterView();
 
             this.newsCollection = new NewsCollection();

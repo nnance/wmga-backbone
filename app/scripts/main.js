@@ -54,7 +54,6 @@ require.config({
         underscore: '../bower_components/underscore/underscore',
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
         'backbone.localstorage': '../bower_components/backbone.localstorage/backbone.localstorage',
-        'backbone.stickit': '../bower_components/backbone.stickit/backbone.stickit',
         'backbone.validation': '../bower_components/backbone.validation/src/backbone-validation',
         moment: '../bower_components/moment/moment',
         'bootstrap.datetimepicker': '../bower_components/bootstrap3-datetimepicker/src/js/bootstrap-datetimepicker',

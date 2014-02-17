@@ -25,8 +25,8 @@ define([
         },
 
         showView: function(view) {
-            var view = new IndexView({view: view});
-            this.container.setView(view.render());
+            var indexView = new IndexView({view: view});
+            this.container.setView(indexView.render());
         },
 
         showNews: function(filter) {

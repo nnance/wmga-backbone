@@ -9,7 +9,6 @@
     "requirejs": "~2.1.5",
     "requirejs-text": "~2.0.5",
     "modernizr": "~2.6.2",
-    "backbone.stickit": "~0.7.0",
     "backbone.localstorage": "~1.1.7",
     "backbone.validation": "~0.7.1",
     "moment": "~2.5.1",

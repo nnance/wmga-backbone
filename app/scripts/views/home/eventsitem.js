@@ -4,17 +4,13 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
-], function ($, _, Backbone, JST) {
+    'templates',
+    'views/viewbase'
+], function ($, _, Backbone, JST, BaseView) {
     'use strict';
 
-    var HomeEventsitemView = Backbone.View.extend({
+    var HomeEventsitemView = BaseView.extend({
         template: JST['app/scripts/templates/home/eventsitem.ejs'],
-
-        render: function() {
-            this.$el.html( this.template( this ) );
-            return this;
-        },
     });
 
     return HomeEventsitemView;

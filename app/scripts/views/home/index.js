@@ -5,12 +5,13 @@ define([
     'underscore',
     'backbone',
     'templates',
+    'views/viewbase',
     'views/home/newsitem',
     'views/home/eventsitem'
-], function ($, _, Backbone, JST, NewsItemView, EventsItemView) {
+], function ($, _, Backbone, JST, BaseView, NewsItemView, EventsItemView) {
     'use strict';
 
-    var HomeIndexView = Backbone.View.extend({
+    var HomeIndexView = BaseView.extend({
 
         template: JST['app/scripts/templates/home/index.ejs'],
 
@@ -21,11 +22,9 @@ define([
             this.listenTo(this.eventsCollection, 'sync', this.renderEvent);
         },
 
-        render: function() {
-            this.$el.html( this.template( this ) );
+        postRender: function() {
             this.renderNews();
             this.renderEvent();
-            return this;
         },
 
         renderNews: function() {

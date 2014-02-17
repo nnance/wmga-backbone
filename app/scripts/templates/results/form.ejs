@@ -5,18 +5,18 @@
         <legend>Summary</legend>
         <div class="form-group">
             <label>Heading:</label>
-            <input class="form-control" type="text" id="title"/>
+            <input class="form-control" type="text" nane="title" value="<%= model.get('title') %>"/>
         </div>
         <div class="form-group">
             <label>Description</label>
-            <textarea rows="5" class="form-control" id="text"></textarea>
+            <textarea rows="5" class="form-control" name="text" value="<%= model.get('title') %>"></textarea>
         </div>
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
                     <label >Tournament Date</label>
                     <div class="input-group" id="itemdatepicker">
-                        <input class="form-control" type="text" id="itemdate">
+                        <input class="form-control" type="text" name="itemdate" value="<%= model.dateAsString('itemdate') %>">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>

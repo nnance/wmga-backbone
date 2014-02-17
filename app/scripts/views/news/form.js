@@ -15,25 +15,9 @@ define([
             'click #cancel-button': 'cancelButton',
         },
 
-        bindings: {
-            '#title': 'title',
-            '#text': 'text',
-            '#itemdate': {
-                observe: 'itemdate',
-                onGet: 'parseDate',
-                onSet: 'convertToDate'
-            }
-        },
-
-        initialize: function() {
-            Backbone.Validation.bind(this);
-            this.listenTo(this.model, 'validated:invalid', this.handleErrors);
-            this.listenTo(this.model, 'sync', this.saveCompleted);
-            this.listenTo(this.model, 'error', this.saveFailed);
-        },
-
         render: function() {
-            this.$el.html( this.template( this ) );
+            FormBaseView.prototype.render.apply(this,arguments);
+
             this.$('#itemdatepicker').datetimepicker({
                 pickTime: false
             });
@@ -42,12 +26,10 @@ define([
                 binding: 'attachedfile',
                 classButton: 'btn btn-default'
             });
-            this.stickit();
             return this;
         },
 
-        saveCompleted: function(model, response, options) {
-            this.collection.add(model);
+        routeSuccessfulResult: function() {
             Backbone.history.navigate('#news', true);
         }
     });

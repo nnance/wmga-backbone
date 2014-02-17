@@ -15,16 +15,6 @@ define([
             'click #cancel-button': 'cancelButton',
         },
 
-        bindings: {
-            '#title': 'title',
-            '#text': 'text',
-            '#itemdate': {
-                observe: 'itemdate',
-                onGet: 'parseDate',
-                onSet: 'convertToDate'
-            }
-        },
-
         initialize: function() {
             Backbone.Validation.bind(this);
             this.listenTo(this.model, 'validated:invalid', this.handleErrors);
@@ -42,7 +32,6 @@ define([
                 binding: 'attachedfile',
                 classButton: 'btn btn-default'
             });
-            this.stickit();
             return this;
         },
 

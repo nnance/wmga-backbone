@@ -5,11 +5,11 @@
         <legend>Summary</legend>
         <div class="form-group">
             <label>Event Title:</label>
-            <input class="form-control" type="text" id="title"/>
+            <input class="form-control" type="text" name="title" value="<%= getAttr('title') %>"/>
         </div>
         <div class="form-group">
             <label>Description</label>
-            <textarea rows="5" class="form-control" id="description"></textarea>
+            <textarea rows="5" class="form-control" name="text"><%= getAttr('text') %></textarea>
         </div>
     </fieldset>
     <fieldset>
@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label >Start Date</label>
                     <div class="input-group" id="startdatepicker">
-                        <input class="form-control" type="text" id="startdate">
+                        <input class="form-control" type="text" name="startdate" value="<%= getDateAttr('startdate') %>">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label >Start Date</label>
                     <div class="input-group" id="enddatepicker">
-                        <input class="form-control" type="text" id="enddate">
+                        <input class="form-control" type="text" name="enddate" value="<%= getDateAttr('enddate') %>">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>

@@ -5,7 +5,7 @@ define([
     'backbone',
     'views/home/index',
     'views/events/index',
-    'views/contact',
+    'views/app/contact',
 ], function ($, Backbone, HomeView, EventsView, ContactView) {
     'use strict';
 

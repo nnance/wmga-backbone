@@ -5,11 +5,12 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
-    'templates'
-], function ($, _, Backbone, Bootstrap, JST) {
+    'templates',
+    'views/viewbase'
+], function ($, _, Backbone, Bootstrap, JST, BaseView) {
     'use strict';
 
-    var HeaderView = Backbone.View.extend({
+    var HeaderView = BaseView.extend({
         attributes: {
             class: "navbar navbar-inverse navbar-fixed-top",
             role: "navigation"
@@ -19,11 +20,6 @@ define([
 
         initialize: function(options) {
             this.listenTo(Backbone.history, 'route', this.highlighItem);
-        },
-
-        render: function() {
-            this.$el.html( this.template( this ) );
-            return this;
         },
 
         highlighItem: function(router, route, params) {

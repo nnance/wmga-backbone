@@ -5,19 +5,20 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'views/news/list',
-], function ($, _, Backbone, JST, ListView, ItemView) {
+    'views/viewbase',
+], function ($, _, Backbone, JST, BaseView) {
     'use strict';
 
-    var NewsIndexView = Backbone.View.extend({
+    var NewsIndexView = BaseView.extend({
         template: JST['app/scripts/templates/news/index.ejs'],
 
         initialize: function(options) {
+            BaseView.prototype.initialize.apply(this,arguments);
             this.indexView = options.view;
         },
 
         render: function() {
-            this.$el.html( this.template( this ) );
+            BaseView.prototype.render.apply(this,arguments);
             this.insertView(this.indexView.render(), '#index');
             return this;
         }

@@ -9,9 +9,9 @@ define([
 ], function ($, _, Backbone, JST, BaseView) {
     'use strict';
 
-    var HomeNewsitemView = BaseView.extend({
-        template: JST['app/scripts/templates/home/newsitem.ejs'],
+    var FooterView = BaseView.extend({
+        template: JST['app/scripts/templates/footer.ejs'],
     });
 
-    return HomeNewsitemView;
+    return FooterView;
 });

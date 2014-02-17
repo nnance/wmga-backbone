@@ -5,42 +5,42 @@
         <legend>Summary</legend>
         <div class="form-group">
             <label>User Name</label>
-            <input class="form-control" type="text" id="username"/>
+            <input class="form-control" type="text" name="username" value="<%= model.get('username') %>"/>
         </div>
         <div class="form-group">
             <label>Email</label>
-            <input class="form-control" type="text" id="email"/>
+            <input class="form-control" type="text" name="email" value="<%= model.get('email') %>"/>
         </div>
         <div class="form-group">
             <label>First Name</label>
-            <input class="form-control" type="text" id="firstname"/>
+            <input class="form-control" type="text" name="firstname" value="<%= model.get('firstname') %>"/>
         </div>
         <div class="form-group">
             <label>Last Name</label>
-            <input class="form-control" type="text" id="lastname"/>
+            <input class="form-control" type="text" name="lastname" value="<%= model.get('lastname') %>"/>
         </div>
         <div class="form-group">
             <label>Street Address</label>
-            <input class="form-control" type="text" id="address"/>
+            <input class="form-control" type="text" name="address" value="<%= model.get('address') %>"/>
         </div>
         <div class="form-group">
             <label>City, State Zip</label>
-            <input class="form-control" type="text" id="address2"/>
+            <input class="form-control" type="text" name="address2" value="<%= model.get('address2') %>"/>
         </div>
         <div class="form-group">
             <label>Phone</label>
-            <input class="form-control" type="text" id="phone"/>
+            <input class="form-control" type="text" name="phone" value="<%= model.get('phone') %>"/>
         </div>
         <div class="form-group">
             <label>Alt Phone</label>
-            <input class="form-control" type="text" id="altphone"/>
+            <input class="form-control" type="text" name="altphone" value="<%= model.get('altphone') %>"/>
         </div>
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
                     <label >Birth Date</label>
                     <div class="input-group" id="birthdatepicker">
-                        <input class="form-control" type="text" id="birthdate">
+                        <input class="form-control" type="text" name="birthdate" value="<%= model.dateAsString('birthdate') %>">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>

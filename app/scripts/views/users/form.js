@@ -15,22 +15,6 @@ define([
             'click #cancel-button': 'cancelButton',
         },
 
-        bindings: {
-            '#username': 'username',
-            '#email': 'email',
-            '#firstname': 'firstname',
-            '#lastname': 'lastname',
-            '#address': 'address',
-            '#address2': 'address2',
-            '#phone': 'phone',
-            '#altphone': 'altphone',
-            '#birthdate': {
-                observe: 'birthdate',
-                onGet: 'parseDate',
-                onSet: 'convertToDate'
-            }
-        },
-
         initialize: function() {
             Backbone.Validation.bind(this);
             this.listenTo(this.model, 'validated:invalid', this.handleErrors);
@@ -48,7 +32,6 @@ define([
                 binding: 'picture',
                 classButton: 'btn btn-default'
             });
-            this.stickit();
             return this;
         },
 

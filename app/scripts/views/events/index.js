@@ -5,21 +5,19 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'views/events/list',
-], function ($, _, Backbone, JST, ListView, ItemView) {
+    'views/viewbase',
+], function ($, _, Backbone, JST, BaseView) {
     'use strict';
 
-    var EventsIndexView = Backbone.View.extend({
+    var EventsIndexView = BaseView.extend({
         template: JST['app/scripts/templates/events/index.ejs'],
 
         initialize: function(options) {
             this.indexView = options.view;
         },
 
-        render: function() {
-            this.$el.html( this.template( this ) );
+        postRender: function() {
             this.insertView(this.indexView.render(), '#index');
-            return this;
         }
     });
 

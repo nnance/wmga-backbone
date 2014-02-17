@@ -2,7 +2,7 @@
   <a href="#news/update/<%= model.id %>" class="btn btn-default"> Edit Article</a>
   <a id="delete-btn" class="btn btn-default"> Delete Article</a>
 </div>
-<h3><%= model.get('title') %></h3>
-<h4><%= model.dateAsString('itemdate') %></h4>
-<p><%= model.get('text') %></p>
-<p>Attached file: <a href="<%= getFileUrl() %>"><%= model.get('attachedfile') %></a>
+<h3><%= getAttr('title') %></h3>
+<h4><%= getDateAttr('itemdate') %></h4>
+<p><%= getAttr('text') %></p>
+<p>Attached file: <a href="<%= getFileUrl() %>"><%= getAttr('attachedfile') %></a>

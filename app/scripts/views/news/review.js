@@ -5,21 +5,17 @@ define([
     'underscore',
     'backbone',
     'templates',
+    'views/viewbase',
     'appsettings',
     'views/news/delete'
-], function ($, _, Backbone, JST, AppSettings, DeleteView) {
+], function ($, _, Backbone, JST, BaseView, AppSettings, DeleteView) {
     'use strict';
 
-    var NewsDetailView = Backbone.View.extend({
+    var NewsDetailView = BaseView.extend({
         template: JST['app/scripts/templates/news/review.ejs'],
 
         events: {
             'click #delete-btn': 'showDeleteConfirm',
-        },
-
-        render: function() {
-            this.$el.html( this.template( this ) );
-            return this;
         },
 
         getFileUrl: function() {

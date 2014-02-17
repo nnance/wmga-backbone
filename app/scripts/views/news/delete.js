@@ -5,11 +5,12 @@ define([
     'underscore',
     'backbone',
     'templates',
+    'views/viewbase',
     'views/alert'
-], function ($, _, Backbone, JST, AlertView) {
+], function ($, _, Backbone, JST, BaseView, AlertView) {
     'use strict';
 
-    var NewsDeleteView = Backbone.View.extend({
+    var NewsDeleteView = BaseView.extend({
         className: 'modal fade',
 
         template: JST['app/scripts/templates/news/delete.ejs'],
@@ -20,13 +21,10 @@ define([
         },
 
         initialize: function(options) {
+            BaseView.prototype.initialize.apply(this,arguments);
+
             this.listenTo(this.model, 'sync', this.deleteCompleted);
             this.listenTo(this.model, 'error', this.deleteFailed);
-        },
-
-        render: function() {
-            this.$el.html( this.template( this ) );
-            return this;
         },
 
         show: function() {
