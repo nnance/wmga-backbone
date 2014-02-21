@@ -4,21 +4,13 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
-], function ($, _, Backbone, JST) {
+    'templates',
+    'views/listitembase'
+], function ($, _, Backbone, JST, ListItemBaseView) {
     'use strict';
 
-    var ResultsListitemView = Backbone.View.extend({
+    var ResultsListitemView = ListItemBaseView.extend({
         template: JST['app/scripts/templates/results/listitem.ejs'],
-
-        initialize: function(options) {
-            this.listenTo(this.model, 'change', this.render);
-        },
-
-        render: function() {
-            this.$el.html( this.template( this ) );
-            return this;
-        },
     });
 
     return ResultsListitemView;

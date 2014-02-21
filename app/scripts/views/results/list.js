@@ -5,12 +5,13 @@ define([
     'underscore',
     'backbone',
     'templates',
+    'views/listbase',
     'moment',
     'views/results/listitem'
-], function ($, _, Backbone, JST, Moment, ItemView) {
+], function ($, _, Backbone, JST, ListBaseView, Moment, ItemView) {
     'use strict';
 
-    var ResultsListView = Backbone.View.extend({
+    var ResultsListView = ListBaseView.extend({
         template: JST['app/scripts/templates/results/list.ejs'],
 
         events: {
@@ -18,6 +19,8 @@ define([
         },
 
         initialize: function(options) {
+            ListBaseView.prototype.initialize.apply(this, arguments);
+
             var filterValues = {
                 all: {
                     name: 'all',
@@ -40,28 +43,16 @@ define([
             } else {
                 this.filter = filterValues['all'];
             }
-
-            this.listenTo(this.collection, 'reset,sort', this.renderList);
-            this.listenTo(this.collection, 'add', this.addRow);
         },
 
         render: function() {
-            this.$el.html( this.template( this ) );
-            this.renderList();
+            ListBaseView.prototype.render.apply(this, arguments);
             this.$('#' + this.filter.name).button('toggle');
             return this;
         },
 
-        renderList: function() {
-            this.removeSubViews();
-            this.collection.forEach(function(model) {
-                if (model.getAsDate('itemdate') < this.filter.start && model.getAsDate('itemdate') > this.filter.end)
-                    this.addRow(model);
-            }, this);
-        },
-
-        addRow: function(model) {
-            if (Moment(model.get('itemdate')) < this.filter.start) {
+        renderItem: function(model) {
+            if (model.getAsDate('itemdate') < this.filter.start && model.getAsDate('itemdate') > this.filter.end) {
                 var view = new ItemView({model: model});
                 this.insertView(view.render(),'.container');
             }
