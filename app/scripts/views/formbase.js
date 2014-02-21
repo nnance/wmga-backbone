@@ -44,8 +44,14 @@ define([
         },
 
         handleErrors: function(model, errors) {
+            // restore the model
+            model.set(model.previousAttributes());
+
+            // show the errors in an alert area
             var alertView = new AlertView({errors: errors});
             this.insertView(alertView.render(), '#alert');
+
+            // highlight the fields with errors
             for (var key in errors) {
                 this.$('#' + key).parent().addClass('has-error');
             }
