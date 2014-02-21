@@ -47,8 +47,8 @@ define([
 
         render: function() {
             ListBaseView.prototype.render.apply(this, arguments);
-
             this.$('#' + this.filter.name).button('toggle');
+            return this;
         },
 
         renderItem: function(model) {

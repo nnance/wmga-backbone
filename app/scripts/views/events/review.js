@@ -5,21 +5,17 @@ define([
     'underscore',
     'backbone',
     'templates',
+    'views/viewbase',
     'appsettings',
-    'views/events/delete'
-], function ($, _, Backbone, JST, AppSettings, DeleteView) {
+    'views/delete'
+], function ($, _, Backbone, JST, BaseView, AppSettings, DeleteView) {
     'use strict';
 
-    var EventsDetailView = Backbone.View.extend({
+    var EventsDetailView = BaseView.extend({
         template: JST['app/scripts/templates/events/review.ejs'],
 
         events: {
             'click #delete-btn': 'showDeleteConfirm',
-        },
-
-        render: function() {
-            this.$el.html( this.template( this ) );
-            return this;
         },
 
         getFileUrl: function() {
@@ -27,7 +23,12 @@ define([
         },
 
         showDeleteConfirm: function() {
-            var view = new DeleteView({model: this.model});
+            var view = new DeleteView({
+                model: this.model,
+                modelAttr: 'title',
+                modelTypeName: 'event',
+                successRoute: '#events'
+            });
             this.$el.append(view.render().el);
             view.show();
         }

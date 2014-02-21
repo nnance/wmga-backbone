@@ -22,9 +22,11 @@ define([
             this.listenTo(this.eventsCollection, 'sync', this.renderEvent);
         },
 
-        postRender: function() {
+        render: function() {
+            BaseView.prototype.render.apply(this,arguments);
             this.renderNews();
             this.renderEvent();
+            return this;
         },
 
         renderNews: function() {

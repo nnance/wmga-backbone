@@ -7,7 +7,7 @@ define([
     'templates',
     'views/viewbase',
     'appsettings',
-    'views/news/delete'
+    'views/delete'
 ], function ($, _, Backbone, JST, BaseView, AppSettings, DeleteView) {
     'use strict';
 
@@ -23,7 +23,12 @@ define([
         },
 
         showDeleteConfirm: function() {
-            var view = new DeleteView({model: this.model});
+            var view = new DeleteView({
+                model: this.model,
+                modelAttr: 'title',
+                modelTypeName: 'news article',
+                successRoute: '#news'
+            });
             this.$el.append(view.render().el);
             view.show();
         }

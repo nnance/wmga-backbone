@@ -16,8 +16,10 @@ define([
             this.indexView = options.view;
         },
 
-        postRender: function() {
+        render: function() {
+            BaseView.prototype.render.apply(this,arguments);
             this.insertView(this.indexView.render(), '#index');
+            return this;
         }
     });
 
