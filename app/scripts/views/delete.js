@@ -10,10 +10,10 @@ define([
 ], function ($, _, Backbone, JST, BaseView, AlertView) {
     'use strict';
 
-    var NewsDeleteView = BaseView.extend({
+    var DeleteView = BaseView.extend({
         className: 'modal fade',
 
-        template: JST['app/scripts/templates/news/delete.ejs'],
+        template: JST['app/scripts/templates/delete.ejs'],
 
         events: {
             'click #delete-confirm': 'deleteConfirmed',
@@ -22,6 +22,9 @@ define([
 
         initialize: function(options) {
             BaseView.prototype.initialize.apply(this,arguments);
+
+            if (!options || !options.modelAttr || !options.modelTypeName)
+                throw new Error('Missing required modelAttr or modelTypeName option');
 
             this.listenTo(this.model, 'sync', this.deleteCompleted);
             this.listenTo(this.model, 'error', this.deleteFailed);
@@ -37,8 +40,11 @@ define([
         },
 
         deleteCompleted: function() {
+            var options = this.options;
             this.$el.on('hidden.bs.modal', function() {
-                Backbone.history.navigate('#news', true);
+                if (options.successRoute) {
+                    Backbone.history.navigate(options.successRoute, true);
+                }
             });
             this.$el.modal('hide');
         },
@@ -50,5 +56,5 @@ define([
         }
     });
 
-    return NewsDeleteView;
+    return DeleteView;
 });
