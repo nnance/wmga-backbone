@@ -13,9 +13,10 @@ define([
     'collections/news',
     'collections/events',
     'collections/results',
+    'collections/session',
     'views/app/header',
     'views/app/footer',
-], function ($, _, Backbone, BaseView, Router, NewsRouter, EventsRouter, ResultsRouter, UserRouter, NewsCollection, EventsCollection, ResultsCollection, HeaderView, FooterView) {
+], function ($, _, Backbone, BaseView, Router, NewsRouter, EventsRouter, ResultsRouter, UserRouter, NewsCollection, EventsCollection, ResultsCollection, SessionCollection, HeaderView, FooterView) {
     'use strict';
 
     var AppView = BaseView.extend({
@@ -28,6 +29,7 @@ define([
             this.newsCollection = new NewsCollection();
             this.eventsCollection = new EventsCollection();
             this.resultsCollection = new ResultsCollection();
+            this.sessionCollection = new SessionCollection();
 
             this.router = new Router({container: this.container, newsCol: this.newsCollection, eventsCol: this.eventsCollection});
             this.newsRouter = new NewsRouter({container: this.container, newsCol: this.newsCollection});
@@ -46,8 +48,9 @@ define([
             var newsFetch = this.newsCollection.fetch();
             var eventsFetch = this.eventsCollection.fetch();
             var resultsFetch = this.resultsCollection.fetch();
+            var sessionFetch = this.sessionCollection.fetch();
 
-            $.when(newsFetch, eventsFetch, resultsFetch).then(function(){
+            $.when(newsFetch, eventsFetch, resultsFetch, sessionFetch).then(function(){
                 Backbone.history.start();
             });
         }

@@ -15,15 +15,9 @@ define([
             'click #cancel-button': 'cancelButton',
         },
 
-        initialize: function() {
-            Backbone.Validation.bind(this);
-            this.listenTo(this.model, 'validated:invalid', this.handleErrors);
-            this.listenTo(this.model, 'sync', this.saveCompleted);
-            this.listenTo(this.model, 'error', this.saveFailed);
-        },
-
         render: function() {
-            this.$el.html( this.template( this ) );
+            FormBaseView.prototype.render.apply(this,arguments);
+
             this.$('#birthdatepicker').datetimepicker({
                 pickTime: false
             });
@@ -35,8 +29,7 @@ define([
             return this;
         },
 
-        saveCompleted: function(model, response, options) {
-            this.collection.add(model);
+        routeSuccessfulResult: function() {
             Backbone.history.navigate('#users', true);
         }
     });
