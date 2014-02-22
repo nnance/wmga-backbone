@@ -9,7 +9,7 @@ define([
     'use strict';
 
     var UserCollection = Backbone.Collection.extend({
-        url: AppSettings.baseURL + '/rest/users',
+        url: AppSettings.getBaseURL() + '/rest/users',
 
         model: UserModel,
 

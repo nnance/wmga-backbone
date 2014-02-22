@@ -9,7 +9,7 @@ define([
     'use strict';
 
     var NewsCollection = Backbone.Collection.extend({
-        url: AppSettings.baseURL + '/rest/articles',
+        url: AppSettings.getBaseURL() + '/rest/articles',
 
         model: NewsModel,
 

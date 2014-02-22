@@ -9,7 +9,7 @@ define([
     'use strict';
 
     var EventsCollection = Backbone.Collection.extend({
-        url: AppSettings.baseURL + '/rest/events',
+        url: AppSettings.getBaseURL() + '/rest/events',
 
         model: EventsModel,
 

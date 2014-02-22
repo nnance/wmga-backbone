@@ -59,7 +59,7 @@ define([
 
         sendFile: function(callback) {
             this.filestyleUpload({
-                url: AppSettings.baseURL + '/rest/attachments',
+                url: AppSettings.getBaseURL() + '/rest/attachments',
                 success: _.bind(function(data, textStatus, jqXHR) {
                     this.trigger('uploaded', arguments);
                 }, this),

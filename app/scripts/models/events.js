@@ -15,7 +15,7 @@ define([
 
             dateFormat: AppSettings.dateFormat,
 
-            urlRoot: AppSettings.baseURL + '/rest/events',
+            urlRoot: AppSettings.getBaseURL() + '/rest/events',
 
             validation: {
                 title: {

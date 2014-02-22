@@ -15,7 +15,7 @@ define([
 
             dateFormat: AppSettings.dateFormat,
 
-            urlRoot: AppSettings.baseURL + '/rest/users',
+            urlRoot: AppSettings.getBaseURL() + '/rest/users',
 
             validation: {
                 username: {

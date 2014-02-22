@@ -15,7 +15,7 @@ define([
 
             dateFormat: AppSettings.dateFormat,
 
-            urlRoot: AppSettings.baseURL + '/rest/articles',
+            urlRoot: AppSettings.getBaseURL() + '/rest/articles',
 
             validation: {
                 title: {

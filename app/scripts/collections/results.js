@@ -9,7 +9,7 @@ define([
     'use strict';
 
     var ResultsCollection = Backbone.Collection.extend({
-        url: AppSettings.baseURL + '/rest/results',
+        url: AppSettings.getBaseURL() + '/rest/results',
 
         model: ResultsModel,
 
