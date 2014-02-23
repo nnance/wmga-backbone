@@ -4,17 +4,13 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
-    ], function ($, _, Backbone, JST) {
+    'templates',
+    'views/viewbase'
+], function ($, _, Backbone, JST, BaseView) {
         'use strict';
 
-        var ContactView = Backbone.View.extend({
-            template: JST['app/scripts/templates/contact.ejs'],
-
-            render: function() {
-                this.$el.html( this.template( this ) );
-                return this;
-            },
+        var ContactView = BaseView.extend({
+            template: JST['app/scripts/templates/app/contact.ejs'],
 
             postRender: function() {
                 this.$('#sidebar').affix({

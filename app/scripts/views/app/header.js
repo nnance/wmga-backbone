@@ -16,7 +16,7 @@ define([
             role: "navigation"
         },
 
-        template: JST['app/scripts/templates/header.ejs'],
+        template: JST['app/scripts/templates/app/header.ejs'],
 
         initialize: function(options) {
             this.listenTo(Backbone.history, 'route', this.highlighItem);

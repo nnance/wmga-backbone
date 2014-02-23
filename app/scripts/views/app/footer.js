@@ -10,7 +10,7 @@ define([
     'use strict';
 
     var FooterView = BaseView.extend({
-        template: JST['app/scripts/templates/footer.ejs'],
+        template: JST['app/scripts/templates/app/footer.ejs'],
     });
 
     return FooterView;
