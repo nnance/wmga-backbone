@@ -4,22 +4,19 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
-], function ($, _, Backbone, JST) {
+    'templates',
+    'views/viewbase',
+], function ($, _, Backbone, JST, BaseView) {
     'use strict';
 
-    var AlertView = Backbone.View.extend({
+    var AlertView = BaseView.extend({
         className: 'alert alert-danger alert-dismissable',
 
         template: JST['app/scripts/templates/alert.ejs'],
 
         initialize: function(options) {
+            BaseView.prototype.initialize.apply(this,arguments);
             this.errors = options.errors;
-        },
-
-        render: function() {
-            this.$el.html( this.template( this ) );
-            return this;
         },
     });
 
