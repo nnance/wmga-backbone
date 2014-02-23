@@ -1,6 +1,7 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
+@import 'signin';
 
 .browsehappy {
     margin: 0.2em 0;
@@ -22,6 +23,26 @@ body {
     background-image: url('../images/header_rates.jpg');
 }
 
+.news-img {
+    background-image: url('../images/news.png');
+    display: inline-block;
+    height: 140px;
+    width: 140px;
+}
+
+.events-img {
+    background-image: url('../images/events.png');
+    display: inline-block;
+    height: 140px;
+    width: 140px;
+}
+
+.contact-img {
+    background-image: url('../images/contact.png');
+    display: inline-block;
+    height: 140px;
+    width: 140px;
+}
 
 /* Subhead (other pages)
 ------------------------- */
