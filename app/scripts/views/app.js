@@ -22,20 +22,15 @@ define([
     var AppView = BaseView.extend({
         initialize: function() {
 
-            this.header = new HeaderView();
-            this.container = new BaseView();
-            this.footer = new FooterView();
-
             this.newsCollection = new NewsCollection();
             this.eventsCollection = new EventsCollection();
             this.resultsCollection = new ResultsCollection();
             this.sessionCollection = new SessionCollection();
 
-            this.router = new Router({container: this.container, newsCol: this.newsCollection, eventsCol: this.eventsCollection});
-            this.newsRouter = new NewsRouter({container: this.container, newsCol: this.newsCollection});
-            this.eventsRouter = new EventsRouter({container: this.container, eventsCol: this.eventsCollection});
-            this.resultsRouter = new ResultsRouter({container: this.container, resultsCol: this.resultsCollection});
-            this.userRouter = new UserRouter({container: this.container});
+            this.header = new HeaderView({collection: this.sessionCollection});
+            this.container = new BaseView();
+            this.footer = new FooterView();
+
         },
 
         render: function() {
@@ -45,14 +40,28 @@ define([
         },
 
         initSession: function() {
-            var newsFetch = this.newsCollection.fetch();
-            var eventsFetch = this.eventsCollection.fetch();
-            var resultsFetch = this.resultsCollection.fetch();
-            var sessionFetch = this.sessionCollection.fetch();
+            this.sessionCollection.fetch({success: _.bind(function(){
+                if (this.sessionCollection.length === 0) {
+                    this.sessionCollection.create({signedIn: false});
+                }
+                this.session = this.sessionCollection.at(0);
 
-            $.when(newsFetch, eventsFetch, resultsFetch, sessionFetch).then(function(){
-                Backbone.history.start();
-            });
+                this.router = new Router({container: this.container, session: this.session, newsCol: this.newsCollection, eventsCol: this.eventsCollection});
+                this.newsRouter = new NewsRouter({container: this.container, newsCol: this.newsCollection});
+                this.eventsRouter = new EventsRouter({container: this.container, eventsCol: this.eventsCollection});
+                this.resultsRouter = new ResultsRouter({container: this.container, resultsCol: this.resultsCollection});
+                this.userRouter = new UserRouter({container: this.container, session: this.session});
+
+                var promises = [this.newsCollection.fetch()];
+                promises.push(this.eventsCollection.fetch());
+                promises.push(this.resultsCollection.fetch());
+                if (this.session.get('signedIn'))
+                    promises.push(this.session.validateSession());
+
+                $.when(promises).then(function(){
+                    Backbone.history.start();
+                });
+            },this)});
         }
     });
 

@@ -73,18 +73,23 @@ define([
             this.handleErrors(model,{response: xhr.responseText});
         },
 
-        cancelButton: function() {
+        cancelButton: function(events) {
+            events.preventDefault();
             history.back(1);
         },
 
-        saveButton: function() {
+        saveButton: function(events) {
+            events.preventDefault();
             this.removeSubViews();
             var formData = this.serializeForm('form');
             this.model.save(formData);
         },
 
         saveCompleted: function(model, response, options) {
-            this.collection.add(model);
+            if (this.collection) {
+                this.collection.add(model);
+            }
+
             if (this.filestyleHasFiles()) {
                 this.filestyleUpload();
             } else {

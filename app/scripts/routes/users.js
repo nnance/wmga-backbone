@@ -22,6 +22,7 @@ define([
 
         initialize: function(options) {
             this.container = options.container;
+            this.session = options.session;
             this.usersCollection = new UserCollection();
             this.listenTo(this, 'route', this.loadList);
         },
@@ -31,8 +32,12 @@ define([
         },
 
         showView: function(view) {
-            var view = new IndexView({view: view});
-            this.container.setView(view.render());
+            if (this.session.get('signedIn')) {
+                var view = new IndexView({view: view});
+                this.container.setView(view.render());
+            } else {
+                Backbone.history.navigate('#signin',true);
+            }
         },
 
         showUsers: function(filter) {

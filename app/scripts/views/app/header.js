@@ -6,20 +6,43 @@ define([
     'backbone',
     'bootstrap',
     'templates',
-    'views/viewbase'
+    'views/viewbase',
 ], function ($, _, Backbone, Bootstrap, JST, BaseView) {
     'use strict';
 
     var HeaderView = BaseView.extend({
         attributes: {
-            class: "navbar navbar-inverse navbar-fixed-top",
-            role: "navigation"
+            class: 'navbar navbar-inverse navbar-fixed-top',
+            role: 'navigation'
         },
 
         template: JST['app/scripts/templates/app/header.ejs'],
+        membersTemplate: JST['app/scripts/templates/app/header-members.ejs'],
+        userTemplate: JST['app/scripts/templates/app/header-user.ejs'],
+        signedInTemplate: JST['app/scripts/templates/app/header-user-signed.ejs'],
 
         initialize: function(options) {
+            BaseView.prototype.initialize.apply(this,arguments);
+
+            this.listenToOnce(this.collection, 'sync', this.loadCompleted);
             this.listenTo(Backbone.history, 'route', this.highlighItem);
+        },
+
+        loadCompleted: function() {
+            this.model = this.collection.at(0);
+            this.listenTo(this.model, 'change:signedIn', this.render);
+            this.render();
+        },
+
+        render: function() {
+            BaseView.prototype.render.apply(this,arguments);
+            if (this.model && this.model.get('signedIn')) {
+                this.$('.navbar-collapse').append(this.signedInTemplate( this ));
+                this.$('#nav-news').after(this.membersTemplate(this));
+            } else {
+                this.$('.navbar-collapse').append(this.userTemplate( this ));
+            }
+            return this;
         },
 
         highlighItem: function(router, route, params) {
