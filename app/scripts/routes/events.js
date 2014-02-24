@@ -1,49 +1,28 @@
 /*global define*/
 
 define([
-    'jquery',
-    'backbone',
+    'routes/routerbase',
+    'collections/events',
     'views/events/index',
     'views/events/list',
     'views/events/review',
     'views/events/form',
-], function ($, Backbone, IndexView, ListView, ReviewView, FormView) {
+], function (BaseRouter, EventColleciton, IndexView, ListView, ReviewView, FormView) {
     'use strict';
 
-    var EventsRouter = Backbone.Router.extend({
+    var EventsRouter = BaseRouter.extend({
         routes: {
-            'events': 'showEvents',
+            'events': 'showList',
             'events/create': 'showAddForm',
-            'events/read/:id': 'showEvent',
+            'events/read/:id': 'showReview',
             'events/update/:id': 'showEditForm',
-            'events/filter/:value': 'showEvents'
+            'events/filter/:value': 'showList'
         },
-
-        initialize: function(options) {
-            this.container = options.container;
-            this.eventsCollection = options.eventsCol;
-        },
-
-        showView: function(view) {
-            var view = new IndexView({view: view});
-            this.container.setView(view.render());
-        },
-
-        showEvents: function(filter) {
-            this.showView(new ListView({collection: this.eventsCollection, filter: filter}));
-        },
-
-        showEvent: function(id) {
-            this.showView(new ReviewView({model: this.eventsCollection.get(id)}));
-        },
-
-        showAddForm: function() {
-            this.showView(new FormView({model: new this.eventsCollection.model(), collection: this.eventsCollection}));
-        },
-
-        showEditForm: function(id) {
-            this.showView(new FormView({model: this.eventsCollection.get(id), collection: this.eventsCollection}));
-        },
+        collectionType: EventColleciton,
+        indexView: IndexView,
+        listView: ListView,
+        reviewView: ReviewView,
+        formView: FormView
     });
 
     return EventsRouter;

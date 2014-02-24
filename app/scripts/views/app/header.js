@@ -42,6 +42,8 @@ define([
             } else {
                 this.$('.navbar-collapse').append(this.userTemplate( this ));
             }
+
+            this.highlighItem();
             return this;
         },
 

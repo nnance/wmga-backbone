@@ -1,49 +1,28 @@
 /*global define*/
 
 define([
-    'jquery',
-    'backbone',
+    'routes/routerbase',
+    'collections/results',
     'views/results/index',
     'views/results/list',
     'views/results/review',
     'views/results/form',
-], function ($, Backbone, IndexView, ListView, ReviewView, FormView) {
+], function (BaseRouter, ResultsCollection, IndexView, ListView, ReviewView, FormView) {
     'use strict';
 
-    var ResultsRouter = Backbone.Router.extend({
+    var ResultsRouter = BaseRouter.extend({
         routes: {
-            'results': 'showResults',
+            'results': 'showList',
             'results/create': 'showAddForm',
-            'results/read/:id': 'showArticle',
+            'results/read/:id': 'showReview',
             'results/update/:id': 'showEditForm',
-            'results/filter/:value': 'showResults'
+            'results/filter/:value': 'showList'
         },
-
-        initialize: function(options) {
-            this.container = options.container;
-            this.resultsCollection = options.resultsCol;
-        },
-
-        showView: function(view) {
-            var view = new IndexView({view: view});
-            this.container.setView(view.render());
-        },
-
-        showResults: function(filter) {
-            this.showView(new ListView({collection: this.resultsCollection, filter: filter}));
-        },
-
-        showArticle: function(id) {
-            this.showView(new ReviewView({model: this.resultsCollection.get(id)}));
-        },
-
-        showAddForm: function() {
-            this.showView(new FormView({model: new this.resultsCollection.model(), collection: this.resultsCollection}));
-        },
-
-        showEditForm: function(id) {
-            this.showView(new FormView({model: this.resultsCollection.get(id), collection: this.resultsCollection}));
-        },
+        collectionType: ResultsCollection,
+        indexView: IndexView,
+        listView: ListView,
+        reviewView: ReviewView,
+        formView: FormView
     });
 
     return ResultsRouter;
