@@ -23,7 +23,7 @@ define([
 
             this.removeSubViews();
             var formData = this.serializeForm('form');
-            this.model.set(formData);
+            this.model.set(formData, {validate: true});
 
             if (this.model.isValid('email')) {
                 var users = new UserCollection();
@@ -31,9 +31,11 @@ define([
                     success: _.bind(this.nextStepSuccess,this),
                     error: _.bind(this.nextStepError,this)
                 });
-            } else {
-                this.showErrors({email: 'Not a valid email address'});
             }
+        },
+
+        showErrors: function(errors) {
+            BaseFormView.prototype.showErrors.call(this, _.pick(errors,'email'));
         },
 
         createStep: function(events) {
