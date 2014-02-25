@@ -4,11 +4,12 @@ define([
     'jquery',
     'backbone',
     'models/signup',
+    'views/signup/index',
     'views/signup/typestep',
     'views/signup/emailstep',
     'views/signup/passwordstep',
     'views/signup/createstep',
-], function ($, Backbone, SignUpModel, TypeStepView, EmailStepView, PasswordStepView, CreateStepView) {
+], function ($, Backbone, SignUpModel, IndexView, TypeStepView, EmailStepView, PasswordStepView, CreateStepView) {
     'use strict';
 
     var SignupRouter = Backbone.Router.extend({
@@ -19,7 +20,10 @@ define([
 
         initialize: function(options) {
             this.container = options.container;
+            this.session = options.session;
+
             this.model = new SignUpModel();
+            this.indexView = new IndexView();
             this.views = {
                 welcome: TypeStepView,
                 email: EmailStepView,
@@ -35,8 +39,12 @@ define([
             if (step !== 'welcome' && !this.model.has('existingMember')) {
                 Backbone.history.navigate('#signup', true);
             } else {
-                var view = new ViewType({model: this.model});
-                this.container.setView(view.render());
+                if (step === 'welcome') {
+                    this.container.setView(this.indexView.render());
+                }
+                var view = new ViewType({model: this.model, session: this.session});
+                this.indexView.removeSubViews();
+                this.indexView.insertView(view.render(),'#stepContent');
             }
         }
     });

@@ -36,7 +36,7 @@ define([
 
         createStep: function(events) {
             events.preventDefault();
-            Backbone.history.navigate('#signup/create');
+            Backbone.history.navigate('#signup/email', true);
         },
 
         nextStepSuccess: function(col, resp, opt) {

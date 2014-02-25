@@ -40,7 +40,6 @@ define([
 
         createStep: function(events) {
             events.preventDefault();
-
             Backbone.history.navigate('#signup/create', true);
         },
 

@@ -1,15 +1,13 @@
-<div class="jumbotron">
-	<h2>Existing Account</h2>
-	<p>Please complete the information below to create your new account.</p>
-	<form role="form">
-        <div id="alert"/>
-    	<div class="form-group">
-    		<label>Email address</label>
-    		<input type="email" class="form-control" name="email" value="<%= model.get('email')%>">
-    	</div>
-	</form>
-	<p>
-        <a class="btn btn-lg btn-primary" role="button">Next &raquo;</a>
-        <a class="btn btn-lg btn-default hidden" role="button">Create new account</a>
-	</p>
-</div>
+<h2>Existing Account</h2>
+<p>Please complete the information below to create your new account.</p>
+<form role="form">
+    <div id="alert"/>
+    <div class="form-group">
+        <label>Email address</label>
+        <input type="email" class="form-control" name="email" value="<%= model.get('email')%>">
+    </div>
+</form>
+<p>
+    <a class="btn btn-primary" role="button">Next &raquo;</a>
+    <a class="btn btn-default hidden" role="button">Create new account</a>
+</p>
