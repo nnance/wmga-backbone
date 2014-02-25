@@ -20,9 +20,9 @@ define([
             events.preventDefault();
             this.model.set(this.serializeForm('form'));
             if (this.model.get('existingMember') === 'yes') {
-                Backbone.history.navigate('#signup/step/2', true);
+                Backbone.history.navigate('#signup/email', true);
             } else {
-                Backbone.history.navigate('#signup/step/3', true);
+                Backbone.history.navigate('#signup/create', true);
             }
         }
 

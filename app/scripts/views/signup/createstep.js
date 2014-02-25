@@ -10,8 +10,8 @@ define([
 ], function ($, _, Backbone, JST, UserCollection, BaseFormView) {
     'use strict';
 
-    var EmailStepView = BaseFormView.extend({
-        template: JST['app/scripts/templates/signup/emailstep.ejs'],
+    var CreateStep = BaseFormView.extend({
+        template: JST['app/scripts/templates/signup/createstep.ejs'],
 
         events: {
             'click .btn-primary': 'nextStep',
@@ -23,28 +23,25 @@ define([
 
             this.removeSubViews();
             var formData = this.serializeForm('form');
-            this.model.set(formData);
 
-            if (this.model.isValid('email')) {
+            this.model.set(formData, {validate: true});
+            if (this.model.isValid()) {
                 var users = new UserCollection();
                 users.fetch({data: formData,
                     success: _.bind(this.nextStepSuccess,this),
                     error: _.bind(this.nextStepError,this)
                 });
-            } else {
-                this.showErrors({email: 'Not a valid email address'});
             }
         },
 
         createStep: function(events) {
             events.preventDefault();
-
-            Backbone.history.navigate('#signup/create', true);
+            Backbone.history.navigate('#signup/create');
         },
 
         nextStepSuccess: function(col, resp, opt) {
-            if (col.length === 0) {
-                this.showErrors({email: 'Email address not found.'});
+            if (col.length !== 0) {
+                this.showErrors({email: 'Email address alredy exists.'});
                 this.$('.hidden').removeClass('hidden');
             } else {
                 Backbone.history.navigate('#signup/password', true);
@@ -57,5 +54,5 @@ define([
         }
     });
 
-    return EmailStepView;
+    return CreateStep;
 });

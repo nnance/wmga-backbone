@@ -9,7 +9,7 @@ define([
 ], function ($, _, Backbone, JST, BaseFormView) {
     'use strict';
 
-    var TypeStepView = BaseFormView.extend({
+    var PasswordStepView = BaseFormView.extend({
         template: JST['app/scripts/templates/signup/passwordstep.ejs'],
 
         events: {
@@ -23,5 +23,5 @@ define([
         }
     });
 
-    return TypeStepView;
+    return PasswordStepView;
 });

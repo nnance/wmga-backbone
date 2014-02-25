@@ -46,14 +46,19 @@ define([
         handleErrors: function(model, errors) {
             // restore the model
             model.set(model.previousAttributes());
+            this.showErrors(errors);
+        },
 
-            // show the errors in an alert area
-            var alertView = new AlertView({errors: errors});
-            this.insertView(alertView.render(), '#alert');
+        showErrors: function(errors) {
+            if (_.keys(errors).length > 0) {
+                // show the errors in an alert area
+                var alertView = new AlertView({errors: errors});
+                this.insertView(alertView.render(), '#alert');
 
-            // highlight the fields with errors
-            for (var key in errors) {
-                this.$('#' + key).parent().addClass('has-error');
+                // highlight the fields with errors
+                for (var key in errors) {
+                    this.$('#' + key).parent().addClass('has-error');
+                }
             }
         },
 
