@@ -41,9 +41,9 @@ define([
                 this.session = this.sessionCollection.at(0);
 
                 this.router = new Router({container: this.container, session: this.session});
-                this.newsRouter = new NewsRouter({container: this.container});
-                this.eventsRouter = new EventsRouter({container: this.container});
-                this.resultsRouter = new ResultsRouter({container: this.container});
+                this.newsRouter = new NewsRouter({container: this.container, session: this.session});
+                this.eventsRouter = new EventsRouter({container: this.container, session: this.session});
+                this.resultsRouter = new ResultsRouter({container: this.container, session: this.session});
                 this.signupRouter = new SignUpRouter({container: this.container, session: this.session});
                 this.userRouter = new UserRouter({container: this.container, session: this.session});
 

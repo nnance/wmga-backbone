@@ -13,24 +13,35 @@ define([
 
         validateSession: function() {
             var signin = new SignInModel();
-            return signin.save(this.attributes, {
+            return signin.save({
+                email: this.get('email'),
+                password: this.get('password')
+            }, {
+                success: _.bind(function(model){
+                    this.signin(model,true);
+                }, this),
                 error: _.bind(this.signout, this)
             });
         },
 
-        signin: function(userid, email, name, token) {
-            this.save({
-                userid: userid,
-                email: email,
-                name: name,
-                password: token,
+        signin: function(user, remember) {
+            this.set({
+                userid: user.id,
+                email: user.get('email'),
+                name: user.get('firstname') + ' ' + user.get('lastname'),
+                password: user.get('passwordHash'),
+                admin: user.get('admin'),
+                treasure: user.get('treasure'),
                 signedIn: true
             });
+            if (remember) this.save();
         },
 
         signout: function() {
             this.save({
-                signedIn: false
+                signedIn: false,
+                admin: false,
+                treasure: false,
             });
         },
     });

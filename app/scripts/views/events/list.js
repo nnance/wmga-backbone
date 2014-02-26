@@ -13,6 +13,7 @@ define([
 
     var EventsListView = ListBaseView.extend({
         template: JST['app/scripts/templates/events/list.ejs'],
+        addButtonTemplate: JST['app/scripts/templates/events/addbutton.ejs'],
 
         events: {
             'click #filter': 'switchFilter'

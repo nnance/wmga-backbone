@@ -5,21 +5,18 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'views/viewbase',
+    'views/reviewbase',
     'appsettings',
     'views/delete'
-], function ($, _, Backbone, JST, BaseView, AppSettings, DeleteView) {
+], function ($, _, Backbone, JST, ReviewBaseView, AppSettings, DeleteView) {
     'use strict';
 
-    var ResultsDetailView = BaseView.extend({
+    var ResultsDetailView = ReviewBaseView.extend({
         template: JST['app/scripts/templates/results/review.ejs'],
+        editButtonsTemplate: JST['app/scripts/templates/results/editbuttons.ejs'],
 
         events: {
             'click #delete-btn': 'showDeleteConfirm',
-        },
-
-        getFileUrl: function() {
-            return AppSettings.getBaseURL() + '/attachments/' + this.model.get('attachedfile');
         },
 
         showDeleteConfirm: function() {

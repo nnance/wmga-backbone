@@ -33,8 +33,8 @@ define([
         },
 
         saveCompleted: function(model, response, options) {
-            var user = model.attributes;
-            this.session.signin(model.id, user.email, user.firstname + ' ' + user.lastname, user.passwordHash);
+            var remember = this.$('input:checkbox:checked').val();
+            this.session.signin(model, remember);
             history.back(1);
         }
     });

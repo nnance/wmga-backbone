@@ -11,6 +11,7 @@ define([
 
     var UsersListitemView = ListItemBaseView.extend({
         template: JST['app/scripts/templates/users/listitem.ejs'],
+        tagName: 'tr'
     });
 
     return UsersListitemView;

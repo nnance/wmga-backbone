@@ -38,7 +38,11 @@ define([
         },
 
         showHome: function() {
-            var view = new HomeView({newsCol: this.newsCollection, eventsCol: this.eventsCollection});
+            var view = new HomeView({
+                newsCol: this.newsCollection,
+                eventsCol: this.eventsCollection,
+                session: this.session
+            });
             this.container.setView(view.render());
         },
 

@@ -20,7 +20,7 @@ define([
 
         renderItem: function(model) {
             var view = new ItemView({model: model});
-            this.insertView(view.render(),'.container');
+            this.insertView(view.render(),'table');
         },
 
         switchFilter: function() {

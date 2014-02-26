@@ -5,14 +5,15 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'views/viewbase',
+    'views/reviewbase',
     'appsettings',
     'views/delete'
-], function ($, _, Backbone, JST, BaseView, AppSettings, DeleteView) {
+], function ($, _, Backbone, JST, ReviewBaseView, AppSettings, DeleteView) {
     'use strict';
 
-    var EventsDetailView = BaseView.extend({
+    var EventsDetailView = ReviewBaseView.extend({
         template: JST['app/scripts/templates/events/review.ejs'],
+        editButtonsTemplate: JST['app/scripts/templates/news/editbuttons.ejs'],
 
         events: {
             'click #delete-btn': 'showDeleteConfirm',

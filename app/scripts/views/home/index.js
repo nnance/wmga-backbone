@@ -14,16 +14,22 @@ define([
     var HomeIndexView = BaseView.extend({
 
         template: JST['app/scripts/templates/home/index.ejs'],
+        signUpTemplate: JST['app/scripts/templates/home/signupbutton.ejs'],
 
         initialize: function(options) {
+            this.session = options.session;
             this.newsCollection = options.newsCol;
             this.eventsCollection = options.eventsCol;
+
             this.listenTo(this.newsCollection, 'sync', this.renderNews);
             this.listenTo(this.eventsCollection, 'sync', this.renderEvent);
         },
 
         render: function() {
             BaseView.prototype.render.apply(this,arguments);
+            if (this.session.get('admin')) {
+                this.$('#jumbotron').append(this.signUpTemplate(this));
+            }
             this.renderNews();
             this.renderEvent();
             return this;
