@@ -25,6 +25,7 @@ define([
             this.container = new BaseView();
             this.footer = new FooterView();
 
+            this.listenTo(Backbone.history,'route',this.updateTracking);
         },
 
         render: function() {
@@ -52,6 +53,10 @@ define([
                 }
                 Backbone.history.start();
             },this)});
+        },
+
+        updateTracking: function(router, route, params) {
+            ga('send','pageview','/', window.location.hash);
         }
     });
 
