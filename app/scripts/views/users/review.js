@@ -30,12 +30,13 @@ define([
                 if (this.session.get('admin') || this.session.get('userid') === this.model.id) {
                     this.$('.btn-toolbar').append(this.editButtonsTemplate(this));
                 }
-                if (this.session.get('admin') || this.session.get('email') === 'nance.nick@gmail.com') {
-                    this.$el.append(this.adminTemplate(this));
+                if (this.session.get('email') === 'nance.nick@gmail.com') {
+                    this.$('#info').append(this.adminTemplate(this)).
+                    append(this.treasureTemplate(this));
                 }
-                if (this.session.get('treasure') || this.session.get('email') === 'nance.nick@gmail.com') {
-                    this.$el.append(this.treasureTemplate(this));
-                }
+            }
+            if (this.model.get('paid')) {
+                this.$('#notPaid').remove();
             }
             return this;
         },

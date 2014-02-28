@@ -16,13 +16,21 @@ define([
             'users/create': 'showAddForm',
             'users/read/:id': 'showReview',
             'users/update/:id': 'showEditForm',
-            'users/filter/:value': 'showUsers'
+            'membership': 'showMembership'
         },
         collectionType: UserCollection,
         indexView: IndexView,
         listView: ListView,
         reviewView: ReviewView,
-        formView: FormView
+        formView: FormView,
+
+        showMembership: function() {
+            if (this.session.has('userid') && this.session.get('signedIn')) {
+                this.showReview(this.session.get('userid'));
+            } else {
+                Backbone.history.navigate('#home',true);
+            }
+        }
     });
 
     return UsersRouter;
