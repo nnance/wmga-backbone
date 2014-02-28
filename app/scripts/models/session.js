@@ -11,8 +11,16 @@ define([
             signedIn: false
         },
 
-        validateSession: function() {
+        validateSession: function(email, password) {
             var signin = new SignInModel();
+
+            if (email && password) {
+                this.set({
+                    email: email,
+                    password: password
+                })
+            }
+
             return signin.save({
                 email: this.get('email'),
                 password: this.get('password')
@@ -35,6 +43,7 @@ define([
                 signedIn: true
             });
             if (remember) this.save();
+            this.trigger('signin');
         },
 
         signout: function() {
@@ -43,6 +52,7 @@ define([
                 admin: false,
                 treasure: false,
             });
+            this.trigger('signout');
         },
     });
 

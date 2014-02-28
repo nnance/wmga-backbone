@@ -18,6 +18,10 @@ define([
         initialize: function(options) {
             BaseView.prototype.initialize.apply(this,arguments);
 
+            if (options && options.session) {
+                this.session = options.session;
+            }
+
             if (this.model) {
                 Backbone.Validation.bind(this);
                 this.listenTo(this.model, 'validated:invalid', this.handleErrors);
