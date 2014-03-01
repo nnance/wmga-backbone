@@ -17,6 +17,7 @@ define([
         routes: {
             '': 'showHome',
             'home': 'showHome',
+            'home/signup:value': 'showHome',
             'signin': 'showSignIn',
             'signout': 'signOutUser',
             'contact': 'showContact'
@@ -37,11 +38,12 @@ define([
             this.eventsCollection.fetch();
         },
 
-        showHome: function() {
+        showHome: function(showSignUp) {
             var view = new HomeView({
                 newsCol: this.newsCollection,
                 eventsCol: this.eventsCollection,
-                session: this.session
+                session: this.session,
+                showSignUp: showSignUp
             });
             this.container.setView(view.render());
         },

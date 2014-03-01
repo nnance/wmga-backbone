@@ -20,6 +20,7 @@ define([
             this.session = options.session;
             this.newsCollection = options.newsCol;
             this.eventsCollection = options.eventsCol;
+            this.showSignUp = options.showSignUp;
 
             this.listenTo(this.newsCollection, 'sync', this.renderNews);
             this.listenTo(this.eventsCollection, 'sync', this.renderEvent);
@@ -27,7 +28,7 @@ define([
 
         render: function() {
             BaseView.prototype.render.apply(this,arguments);
-            if (this.session.get('admin')) {
+            if (this.session.get('admin') || this.showSignUp) {
                 this.$('#jumbotron').append(this.signUpTemplate(this));
             }
             this.renderNews();

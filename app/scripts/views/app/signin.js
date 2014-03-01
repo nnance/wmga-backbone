@@ -5,15 +5,17 @@ define([
     'underscore',
     'backbone',
     'templates',
+    'models/requestpassword',
     'views/formbase',
-], function ($, _, Backbone, JST, FormBaseView) {
+], function ($, _, Backbone, JST, RequestPassword, FormBaseView) {
     'use strict';
 
     var SignInView = FormBaseView.extend({
         template: JST['app/scripts/templates/app/signin.ejs'],
 
         events: {
-            'click .btn': 'saveButton'
+            'click .btn': 'saveButton',
+            'click #forgotPassword': 'sendPasswordEmail'
         },
 
         initialize: function(options) {
@@ -36,7 +38,21 @@ define([
             var remember = this.$('input:checkbox:checked').val();
             this.session.signin(model, remember);
             history.back(1);
+        },
+
+        sendPasswordEmail: function(events) {
+            events.preventDefault();
+            this.removeSubViews();
+            var passwordEmail = new RequestPassword();
+            _.extend(passwordEmail, Backbone.Validation.mixin);
+            this.listenTo(passwordEmail, 'validated:invalid', this.handleErrors);
+            passwordEmail.save(this.serializeForm('form'),{
+                success: _.bind(function() {
+                    this.handleErrors(this.model,{result: 'Please check your email for your password.'});
+                },this)
+            });
         }
+
     });
 
     return SignInView;

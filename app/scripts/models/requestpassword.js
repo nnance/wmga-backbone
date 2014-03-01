@@ -16,7 +16,8 @@ define([
 
             validation: {
                 email: {
-                    required: true
+                    required: true,
+                    pattern: 'email'
                 },
             },
         });
