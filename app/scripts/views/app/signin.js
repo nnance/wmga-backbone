@@ -40,8 +40,8 @@ define([
             history.back(1);
         },
 
-        sendPasswordEmail: function(events) {
-            events.preventDefault();
+        sendPasswordEmail: function() {
+            event.preventDefault();
             this.removeSubViews();
             var passwordEmail = new RequestPassword();
             _.extend(passwordEmail, Backbone.Validation.mixin);

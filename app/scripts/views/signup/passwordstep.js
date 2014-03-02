@@ -18,8 +18,8 @@ define([
             'click #forgotPassword': 'sendPasswordEmail'
         },
 
-        nextStep: function(events) {
-            events.preventDefault();
+        nextStep: function() {
+            event.preventDefault();
             this.model.set(this.serializeForm('form'));
 
             this.listenTo(this.session, 'change:signedIn', this.nextStepSuccess);
@@ -40,8 +40,8 @@ define([
             Backbone.history.navigate(url, true);
         },
 
-        sendPasswordEmail: function(events) {
-            events.preventDefault();
+        sendPasswordEmail: function() {
+            event.preventDefault();
             var passwordEmail = new RequestPassword({email: this.model.get('email')});
             passwordEmail.save()
             .done(_.bind(function() {

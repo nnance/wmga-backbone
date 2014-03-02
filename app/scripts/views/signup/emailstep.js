@@ -18,8 +18,8 @@ define([
             'click .btn-default': 'createStep'
         },
 
-        nextStep: function(events) {
-            events.preventDefault();
+        nextStep: function() {
+            event.preventDefault();
 
             this.removeSubViews();
             var formData = this.serializeForm('form');
@@ -38,8 +38,8 @@ define([
             BaseFormView.prototype.showErrors.call(this, _.pick(errors,'email'));
         },
 
-        createStep: function(events) {
-            events.preventDefault();
+        createStep: function() {
+            event.preventDefault();
             Backbone.history.navigate('#signup/create', true);
         },
 

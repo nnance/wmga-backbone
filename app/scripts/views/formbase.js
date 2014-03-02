@@ -82,13 +82,13 @@ define([
             this.handleErrors(model,{response: xhr.responseText});
         },
 
-        cancelButton: function(events) {
-            events.preventDefault();
+        cancelButton: function() {
+            event.preventDefault();
             history.back(1);
         },
 
-        saveButton: function(events) {
-            events.preventDefault();
+        saveButton: function() {
+            event.preventDefault();
             this.removeSubViews();
             var formData = this.serializeForm('form');
             this.model.save(formData);
