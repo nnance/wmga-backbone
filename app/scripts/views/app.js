@@ -45,8 +45,8 @@ define([
                 this.newsRouter = new NewsRouter({container: this.container, session: this.session});
                 this.eventsRouter = new EventsRouter({container: this.container, session: this.session});
                 this.resultsRouter = new ResultsRouter({container: this.container, session: this.session});
-                this.signupRouter = new SignUpRouter({container: this.container, session: this.session});
                 this.userRouter = new UserRouter({container: this.container, session: this.session});
+                this.signupRouter = new SignUpRouter({container: this.container, collection: this.userRouter.collection, session: this.session});
 
                 if (this.session.get('signedIn')){
                     this.session.validateSession();

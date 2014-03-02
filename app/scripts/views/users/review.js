@@ -48,6 +48,10 @@ define([
             return AppSettings.getBaseURL() + '/attachments/' + this.model.get('attachedfile');
         },
 
+        getMembershipPayNow: function() {
+            return AppSettings.membershipPayNow + this.model.get('email');
+        },
+
         showDeleteConfirm: function() {
             var view = new DeleteView({
                 model: this.model,

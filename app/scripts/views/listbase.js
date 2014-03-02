@@ -23,7 +23,13 @@ define([
         render: function() {
             BaseView.prototype.render.apply(this,arguments);
             if (this.addButtonTemplate && this.session && this.session.get('admin')) {
-                this.$('.btn-group').append(this.addButtonTemplate(this));
+                var inputGroup = this.$('.input-group');
+                var btnGroup = this.$('.btn-group');
+                if (inputGroup) {
+                    inputGroup.append(this.addButtonTemplate(this));
+                } else {
+                    btnGroup.append(this.addButtonTemplate(this));
+                }
             }
             this.renderList();
             return this;

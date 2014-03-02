@@ -40,10 +40,10 @@ define([
                 password: user.get('passwordHash'),
                 admin: user.get('admin'),
                 treasure: user.get('treasure'),
+                paid: user.get('paid'),
                 signedIn: true
             });
             if (remember) this.save();
-            this.trigger('signin');
         },
 
         signout: function() {
@@ -52,7 +52,6 @@ define([
                 admin: false,
                 treasure: false,
             });
-            this.trigger('signout');
         },
     });
 

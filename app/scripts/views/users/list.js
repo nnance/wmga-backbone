@@ -26,7 +26,7 @@ define([
                 if (filter) {
                     if (user.getFullName().toLowerCase().indexOf(filter.toLowerCase()) > -1) {
                         return true;
-                    } else if (user.get('email').toLowerCase().indexOf(filter.toLowerCase) > -1) {
+                    } else if (user.get('email').toLowerCase().indexOf(filter.toLowerCase()) > -1) {
                         return true;
                     }
                 } else {

@@ -3,32 +3,37 @@
 define([
     'jquery',
     'backbone',
-    'models/signup',
+    'models/user',
     'views/signup/index',
     'views/signup/typestep',
     'views/signup/emailstep',
     'views/signup/passwordstep',
     'views/signup/createstep',
-], function ($, Backbone, SignUpModel, IndexView, TypeStepView, EmailStepView, PasswordStepView, CreateStepView) {
+    'views/signup/paynowstep',
+    'views/signup/paynowcreatedstep',
+], function ($, Backbone, UserModel, IndexView, TypeStepView, EmailStepView, PasswordStepView, CreateStepView, PayNowStepView, PayNowCreatedView) {
     'use strict';
 
     var SignupRouter = Backbone.Router.extend({
         routes: {
             'signup': 'showSignup',
-            'signup/:step': 'showSignup'
+            'signup/:step': 'showSignup',
         },
 
         initialize: function(options) {
             this.container = options.container;
+            this.collection = options.collection;
             this.session = options.session;
+            this.model = new UserModel();
 
-            this.model = new SignUpModel();
             this.indexView = new IndexView();
             this.views = {
                 welcome: TypeStepView,
                 email: EmailStepView,
                 password: PasswordStepView,
-                create: CreateStepView
+                create: CreateStepView,
+                paynow: PayNowStepView,
+                createpaynow: PayNowCreatedView
             };
         },
 
@@ -40,13 +45,15 @@ define([
                 Backbone.history.navigate('#signup', true);
             } else {
                 if (step === 'welcome') {
+                    this.session.signout();
+                    this.model = new UserModel();
                     this.container.setView(this.indexView.render());
                 }
-                var view = new ViewType({model: this.model, session: this.session});
+                var view = new ViewType({model: this.model, collection: this.collection, session: this.session});
                 this.indexView.removeSubViews();
                 this.indexView.insertView(view.render(),'#stepContent');
             }
-        }
+        },
     });
 
     return SignupRouter;

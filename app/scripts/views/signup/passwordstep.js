@@ -22,16 +22,22 @@ define([
             events.preventDefault();
             this.model.set(this.serializeForm('form'));
 
+            this.listenTo(this.session, 'change:signedIn', this.nextStepSuccess);
             this.session.validateSession(
                 this.model.get('email'), this.model.get('password')
             ).
-            done( function(data) {
-                Backbone.history.navigate('#membership', true);
-            }).
             fail( _.bind(function(jqXHR, textStatus, errorThrown) {
                 this.handleErrors(this.model, {response: 'password does not match'});
             },this));
 
+        },
+
+        nextStepSuccess: function() {
+            var url = '#signup/paynow';
+            if (this.session.get('paid')) {
+                url = '#membership';
+            }
+            Backbone.history.navigate(url, true);
         },
 
         sendPasswordEmail: function(events) {

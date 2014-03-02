@@ -44,7 +44,16 @@ define([
                 this.showErrors({email: 'Email address alredy exists.'});
                 this.$('.hidden').removeClass('hidden');
             } else {
-                Backbone.history.navigate('#signup/password', true);
+                this.model.save({},{
+                    success: _.bind(function() {
+                        this.collection.add(this.model);
+                        this.session.signin(this.model,true);
+                        Backbone.history.navigate('#signup/createpaynow', true);
+                    },this),
+                    error: _.bind(function(model, response, options) {
+                        this.handleError(model, response);
+                    },this)
+                });
             }
 
         },

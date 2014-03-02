@@ -17,7 +17,7 @@
     </div>
     <p>There is an annual membership cost required to join the association.  It is also important to understand that you must be a member of the WMGA in order to participate in any WMGA tournament or event.  Use the pay now button below to be able to participate in WMGA events this year. The annual membership fee $25.</p>
     <p>Membership Status: <b><%= model.get('paid') ? 'Paid' : '$25 Payment Due' %></b></p>
-    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DNR67PXFP5DX8&invoice=2014-<%= model.get('email')%>" id="notPaid">
+    <a href="<%= getMembershipPayNow() %>" id="notPaid">
         <img src="https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif">
     </a><br/>
     <br/>
