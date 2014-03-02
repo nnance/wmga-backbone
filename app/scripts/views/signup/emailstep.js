@@ -5,9 +5,8 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'collections/user',
     'views/formbase'
-], function ($, _, Backbone, JST, UserCollection, BaseFormView) {
+], function ($, _, Backbone, JST, BaseFormView) {
     'use strict';
 
     var EmailStepView = BaseFormView.extend({
@@ -26,8 +25,7 @@ define([
             this.model.set(formData, {validate: true});
 
             if (this.model.isValid('email')) {
-                var users = new UserCollection();
-                users.fetch({data: formData,
+                this.collection.fetch({data: formData,
                     success: _.bind(this.nextStepSuccess,this),
                     error: _.bind(this.nextStepError,this)
                 });

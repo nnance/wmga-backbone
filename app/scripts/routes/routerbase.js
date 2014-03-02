@@ -12,11 +12,19 @@ define([
             this.session = options.session;
             this.container = options.container;
             this.collection = new this.collectionType();
+
+            this.loaded = false;
             this.listenToOnce(this, 'route', this.loadList);
         },
 
         loadList: function(route, params) {
-            this.collection.fetch();
+            this.collection.fetch()
+            .always(_.bind(function(){
+                this.loaded = true;
+                if (route) {
+                    this[route].apply(this,params);
+                }
+            },this));
         },
 
         showView: function(view) {
@@ -25,44 +33,40 @@ define([
         },
 
         showList: function(filter) {
-            this.showView(new this.listView({
-                collection: this.collection,
-                filter: filter,
-                session: this.session
-            }));
+            if (this.loaded) {
+                this.showView(new this.listView({
+                    collection: this.collection,
+                    filter: filter,
+                    session: this.session
+                }));
+            }
         },
 
         showReview: function(id) {
-            var model = this.collection.get(id);
-            if (model) {
+            if (this.loaded) {
+                var model = this.collection.get(id);
                 this.showView(new this.reviewView({model: model, session: this.session}));
-            } else {
-                this.listenToOnce(this.collection, 'sync', _.bind(function(){
-                    this.showReview(id);
-                },this))
             }
         },
 
         showAddForm: function() {
-            this.showView(new this.formView({
-                model: new this.collection.model(),
-                collection: this.collection,
-                session: this.session
-            }));
+            if (this.loaded) {
+                this.showView(new this.formView({
+                    model: new this.collection.model(),
+                    collection: this.collection,
+                    session: this.session
+                }));
+            }
         },
 
         showEditForm: function(id) {
-            var model = this.collection.get(id);
-            if (model) {
+            if (this.loaded) {
+                var model = this.collection.get(id);
                 this.showView(new this.formView({
                     model: model,
                     collection: this.collection,
                     session: this.session
                 }));
-            } else {
-                this.listenToOnce(this.collection, 'sync', _.bind(function(){
-                    this.showEditForm(id);
-                },this))
             }
         },
     });

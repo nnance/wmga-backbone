@@ -6,9 +6,8 @@ define([
     'backbone',
     'templates',
     'appsettings',
-    'collections/user',
     'views/viewbase'
-], function ($, _, Backbone, JST, AppSettings, UserCollection, BaseView) {
+], function ($, _, Backbone, JST, AppSettings, BaseView) {
     'use strict';
 
     var PayNowStep = BaseView.extend({

@@ -24,11 +24,27 @@ define([
         reviewView: ReviewView,
         formView: FormView,
 
-        showMembership: function() {
-            if (this.session.has('userid') && this.session.get('signedIn')) {
-                this.showReview(this.session.get('userid'));
+        initialize: function() {
+            BaseRouter.prototype.initialize.apply(this,arguments);
+            this.listenTo(this.session,'change:signedIn',this.refreshUsers);
+        },
+
+        refreshUsers: function() {
+            this.loaded = false;
+            if (this.session.get('signedIn')) {
+                this.loadList();
             } else {
-                Backbone.history.navigate('#home',true);
+                this.collection.reset();
+            }
+        },
+
+        showMembership: function() {
+            if (this.loaded) {
+                if (this.session.has('userid') && this.session.get('signedIn')) {
+                    this.showReview(this.session.get('userid'));
+                } else {
+                    Backbone.history.navigate('#home',true);
+                }
             }
         }
     });

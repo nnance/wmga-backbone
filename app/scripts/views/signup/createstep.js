@@ -5,9 +5,8 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'collections/user',
     'views/formbase'
-], function ($, _, Backbone, JST, UserCollection, BaseFormView) {
+], function ($, _, Backbone, JST, BaseFormView) {
     'use strict';
 
     var CreateStep = BaseFormView.extend({
@@ -26,8 +25,7 @@ define([
 
             this.model.set(formData, {validate: true});
             if (this.model.isValid()) {
-                var users = new UserCollection();
-                users.fetch({data: formData,
+                this.collection.fetch({data: {email: formData.email},
                     success: _.bind(this.nextStepSuccess,this),
                     error: _.bind(this.nextStepError,this)
                 });
@@ -46,7 +44,6 @@ define([
             } else {
                 this.model.save({},{
                     success: _.bind(function() {
-                        this.collection.add(this.model);
                         this.session.signin(this.model,true);
                         Backbone.history.navigate('#signup/createpaynow', true);
                     },this),
