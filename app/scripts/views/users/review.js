@@ -26,16 +26,19 @@ define([
 
         render: function() {
             BaseView.prototype.render.apply(this, arguments);
-            if (this.session) {
-                if (this.session.get('admin') || this.session.get('userid') === this.model.id) {
-                    this.$('.btn-toolbar').append(this.editButtonsTemplate(this));
-                }
-                if (this.session.get('email') === 'nance.nick@gmail.com') {
-                    this.$('#info').append(this.adminTemplate(this)).
-                    append(this.treasureTemplate(this));
-                }
+
+            var isSignedUser = this.session.get('userid') === this.model.id;
+            var isAdmin = this.session.get('admin');
+
+            if (isAdmin || isSignedUser) {
+                this.$('.btn-toolbar').append(this.editButtonsTemplate(this));
             }
-            if (this.model.get('paid')) {
+            if (this.session.get('email') === 'nance.nick@gmail.com') {
+                this.$('#info').append(this.adminTemplate(this)).
+                append(this.treasureTemplate(this));
+            }
+
+            if (this.model.get('paid') || !isSignedUser) {
                 this.$('#notPaid').remove();
             }
             return this;

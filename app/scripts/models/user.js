@@ -18,15 +18,19 @@ define([
             urlRoot: AppSettings.getBaseURL() + '/rest/users',
 
             validation: {
-                username: {
-                    required: true
-                },
                 firstname: {
                     required: true
                 },
                 lastname: {
                     required: true
-                }
+                },
+                email: {
+                    required: true,
+                    pattern: 'email'
+                },
+                password: {
+                    required: true
+                },
             },
 
             getFullName: function() {

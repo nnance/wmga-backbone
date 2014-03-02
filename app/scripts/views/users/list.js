@@ -13,9 +13,26 @@ define([
 
     var UsersListView = ListBaseView.extend({
         template: JST['app/scripts/templates/users/list.ejs'],
+        addButtonTemplate: JST['app/scripts/templates/users/addbutton.ejs'],
 
         events: {
-            'click #filter': 'switchFilter'
+            'click #filter': 'switchFilter',
+            'keyup input': 'filterUsers'
+        },
+
+        renderList: function(filter) {
+            this.removeSubViews();
+            _.each(this.collection.filter(function(user){
+                if (filter) {
+                    if (user.getFullName().toLowerCase().indexOf(filter.toLowerCase()) > -1) {
+                        return true;
+                    } else if (user.get('email').toLowerCase().indexOf(filter.toLowerCase) > -1) {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            }), this.renderItem, this);
         },
 
         renderItem: function(model) {
@@ -23,9 +40,11 @@ define([
             this.insertView(view.render(),'table');
         },
 
-        switchFilter: function() {
-            Backbone.history.navigate('#users/filter/' + event.target.id, true);
+        filterUsers: function() {
+            var filter = event.target.value;
+            this.renderList(filter);
         }
+
     });
 
     return UsersListView;
