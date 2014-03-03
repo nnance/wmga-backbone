@@ -22,10 +22,16 @@ define([
             'click #delete-btn': 'showDeleteConfirm',
             'click #admin': 'setAdmin',
             'click #treasure': 'setTreasure',
+            'click #team-btn': 'registerTeam'
+        },
+
+        initialize: function(options) {
+            ReviewBaseView.prototype.initialize.apply(this, arguments);
+            this.teamCollection = options.teamCollection;
         },
 
         render: function() {
-            BaseView.prototype.render.apply(this, arguments);
+            ReviewBaseView.prototype.render.apply(this, arguments);
 
             var isSignedUser = this.session.get('userid') === this.model.id;
             var isAdmin = this.session.get('admin');
@@ -39,16 +45,22 @@ define([
             }
 
             if (this.model.get('paid') || !isSignedUser) {
-                this.$('#notPaid').remove();
+                this.$('#member-unpaid').remove();
+            }
+
+            if (!this.model.has('teamid') || (this.model.get('teamid').length === 0)) {
+                this.$('#team-btn-edit').remove();
+            } else {
+                this.$('#team-btn').remove();
             }
             return this;
         },
 
         getFileUrl: function() {
-            return AppSettings.getBaseURL() + '/attachments/' + this.model.get('attachedfile');
+            return AppSettings.getBaseURL() + '/attachments/' + this.model.get('photo');
         },
 
-        getMembershipPayNow: function() {
+        getPayNow: function() {
             return AppSettings.membershipPayNow + this.model.get('email');
         },
 
@@ -63,18 +75,25 @@ define([
             view.show();
         },
 
-        setAdmin: function(events) {
-            this.model.save({admin: events.target.checked});
-            if (this.session && (this.session.get('userid') === this.model.id)) {
+        setAdmin: function() {
+            event.preventDefault();
+            this.model.save({admin: event.target.checked});
+            if (this.session.get('userid') === this.model.id) {
                 this.session.signin(this.model);
             }
         },
 
-        setTreasure: function(events) {
-            this.model.save({treasure: events.target.checked});
-            if (this.session && (this.session.get('userid') === this.model.id)) {
+        setTreasure: function() {
+            event.preventDefault();
+            this.model.save({treasure: event.target.checked});
+            if (this.session.get('userid') === this.model.id) {
                 this.session.signin(this.model);
             }
+        },
+
+        registerTeam: function() {
+            event.preventDefault();
+            Backbone.history.navigate('#teams/create',true);
         }
     });
 

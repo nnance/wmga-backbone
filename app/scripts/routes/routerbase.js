@@ -34,41 +34,71 @@ define([
 
         showList: function(filter) {
             if (this.loaded) {
-                this.showView(new this.listView({
-                    collection: this.collection,
-                    filter: filter,
-                    session: this.session
-                }));
+                this.showView(this.createListView(filter));
             }
+        },
+
+        createListView: function(filter) {
+            return new this.listView({
+                collection: this.collection,
+                filter: filter,
+                session: this.session
+            })
         },
 
         showReview: function(id) {
             if (this.loaded) {
                 var model = this.collection.get(id);
-                this.showView(new this.reviewView({model: model, session: this.session}));
+                this.showView(this.createReviewView(model));
             }
         },
 
-        showAddForm: function() {
+        createReviewView: function(model) {
+            return new this.reviewView({
+                model: model,
+                session: this.session
+            })
+        },
+
+        showAddForm: function(queryParams) {
             if (this.loaded) {
-                this.showView(new this.formView({
-                    model: new this.collection.model(),
-                    collection: this.collection,
-                    session: this.session
-                }));
+                var model = new this.collection.model();
+                this.showView(this.createFormView(model, queryParams));
             }
+        },
+
+        createFormView: function(model, queryParams) {
+            return new this.formView({
+                model: model,
+                collection: this.collection,
+                session: this.session,
+                queryParams: this.parseQueryString(queryParams)
+            });
         },
 
         showEditForm: function(id) {
             if (this.loaded) {
                 var model = this.collection.get(id);
-                this.showView(new this.formView({
-                    model: model,
-                    collection: this.collection,
-                    session: this.session
-                }));
+                this.showView(this.createFormView(model));
             }
         },
+
+        parseQueryString: function( queryString ) {
+            var params = {}, queries, temp, i, l;
+
+            // Split into key/value pairs
+            if (queryString && queryString.indexOf('?') > -1) {
+                queries = queryString.split('?')[1].split('&');
+
+                // Convert the array of strings into an object
+                for ( i = 0, l = queries.length; i < l; i++ ) {
+                    temp = queries[i].split('=');
+                    params[temp[0]] = temp[1];
+                }
+            }
+
+            return params;
+        }
     });
 
     return BaseRouter;

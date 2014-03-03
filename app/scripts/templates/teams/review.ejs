@@ -1,0 +1,25 @@
+<div class="btn-toolbar pull-right">
+</div>
+<div id="info">
+    <div class="page-header">
+        <h3>Team Info</h3>
+    </div>
+    <h4><%= model.get('name') %></h4>
+    <p>Captain: <%= getCaptainName() %></p>
+    <p>Photo: <a href="<%= getFileUrl() %>"><%= model.get('photo') %></a></p>
+</div>
+<div id="team">
+    <div class="page-header">
+        <h3>Team Dues</h3>
+    </div>
+    <p>There is an annual membership cost required to register a team.  The team manager is responsible for signing up a team and managing the team roster. The team registration fee $300 per season.</p>
+    <p>Team Status: <b><%= model.get('paid') ? 'Paid' : '$300 Payment Due' %></b></p>
+    <div id="team-unpaid">
+        <a href="<%= getPayNow() %>"><img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif"></a>
+    </div>
+    <hr>
+    <h4>Team Members</h4>
+    <hr>
+    <div id="team-table">
+    </div>
+</div>

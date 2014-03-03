@@ -11,8 +11,7 @@ define([], function () {
         },
         dateFormat: 'MM/DD/YYYY',
         membershipPayNow: 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DNR67PXFP5DX8&invoice=2014-',
-        teamPayNow: ''
+        teamPayNow: 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CAN4SWN98RJGJ&invoice=',
     };
-
     return AppSettings;
 });

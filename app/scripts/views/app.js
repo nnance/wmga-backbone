@@ -10,11 +10,12 @@ define([
     'routes/events',
     'routes/results',
     'routes/users',
+    'routes/teams',
     'routes/signup',
     'collections/session',
     'views/app/header',
     'views/app/footer',
-], function ($, _, Backbone, BaseView, Router, NewsRouter, EventsRouter, ResultsRouter, UserRouter, SignUpRouter, SessionCollection, HeaderView, FooterView) {
+], function ($, _, Backbone, BaseView, Router, NewsRouter, EventsRouter, ResultsRouter, UserRouter, TeamRouter, SignUpRouter, SessionCollection, HeaderView, FooterView) {
     'use strict';
 
     var AppView = BaseView.extend({
@@ -45,8 +46,9 @@ define([
                 this.newsRouter = new NewsRouter({container: this.container, session: this.session});
                 this.eventsRouter = new EventsRouter({container: this.container, session: this.session});
                 this.resultsRouter = new ResultsRouter({container: this.container, session: this.session});
+                this.teamRouter = new TeamRouter({container: this.container, session: this.session});
                 this.userRouter = new UserRouter({container: this.container, session: this.session});
-                this.signupRouter = new SignUpRouter({container: this.container, collection: this.userRouter.collection, session: this.session});
+                this.signupRouter = new SignUpRouter({container: this.container, session: this.session});
 
                 if (this.session.get('signedIn')){
                     this.session.validateSession();

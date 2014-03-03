@@ -1,0 +1,6 @@
+<td><b><a href="#teams/read/<%= model.id %>"><%= model.get('name') %></a></b></td>
+<td><span class="glyphicon glyphicon-ok <%= model.get('paid') ? '' : 'hidden' %>"></span></td>
+<td><%= model.get('teetime') %></td>
+<td><%= model.dateAsString('createdate') %></td>
+<td><%= model.get('comments') %></td>
+<td>--</td>

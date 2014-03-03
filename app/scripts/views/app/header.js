@@ -17,7 +17,6 @@ define([
         },
 
         template: JST['app/scripts/templates/app/header.ejs'],
-        membersTemplate: JST['app/scripts/templates/app/header-members.ejs'],
         userTemplate: JST['app/scripts/templates/app/header-user.ejs'],
         signedInTemplate: JST['app/scripts/templates/app/header-user-signed.ejs'],
 
@@ -38,8 +37,9 @@ define([
             BaseView.prototype.render.apply(this,arguments);
             if (this.model && this.model.get('signedIn')) {
                 this.$('.navbar-collapse').append(this.signedInTemplate( this ));
-                this.$('#nav-news').after(this.membersTemplate(this));
             } else {
+                this.$('#nav-users').hide();
+                this.$('#nav-teams').hide();
                 this.$('.navbar-collapse').append(this.userTemplate( this ));
             }
 

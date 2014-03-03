@@ -9,7 +9,7 @@
         <%= model.get('address2') %>
     </p>
     <abbr title="Phone">P:</abbr> <%= model.get('phone') %><br/>
-    <p>Attached file: <a href="<%= getFileUrl() %>"><%= model.get('attachedfile') %></a></p>
+    <p>Photo: <a href="<%= getFileUrl() %>"><%= model.get('photo') %></a></p>
 </div>
 <div id="dues">
     <div class="page-header">
@@ -17,10 +17,20 @@
     </div>
     <p>There is an annual membership cost required to join the association.  It is also important to understand that you must be a member of the WMGA in order to participate in any WMGA tournament or event.  Use the pay now button below to be able to participate in WMGA events this year. The annual membership fee $25.</p>
     <p>Membership Status: <b><%= model.get('paid') ? 'Paid' : '$25 Payment Due' %></b></p>
-    <a href="<%= getMembershipPayNow() %>" id="notPaid">
-        <img src="https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif">
-    </a><br/>
-    <br/>
-    <p id="notPaid"><b>Note:</b> If you have paid using PayPal it can take up to 10 minutes before your payment is reflected on our site.  You will need to refresh this page to see your current status.</p>
-    <p id="notPaid">Do not pay more than once.  If your payment status isn't updated within 24 hours please contact the <a href="#contact">treasure.</a></p>
+    <div id="member-unpaid">
+        <a href="<%= getPayNow() %>">
+            <img src="https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif">
+        </a><br/>
+        <br/>
+    </div>
+    <p id="member-unpaid"><b>Note:</b> If you have paid using PayPal it can take up to 10 minutes before your payment is reflected on our site.  You will need to refresh this page to see your current status.</p>
+    <p id="member-unpaid">Do not pay more than once.  If your payment status isn't updated within 24 hours please contact the <a href="#contact">Treasurer.</a></p>
+</div>
+<div id="team">
+    <div class="page-header">
+        <h3>Thursday Night Team</h3>
+    </div>
+    <p>There is an annual membership cost required to register a team.  The team manager is responsible for signing up a team and managing the team roster. The team registration fee $300 per season.</p>
+    <a class="btn btn-primary" id="team-btn">Team Registration</a>
+    <a class="btn btn-primary" id="team-btn-edit">Manage Team</a>
 </div>
