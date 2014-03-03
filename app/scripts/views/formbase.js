@@ -87,11 +87,14 @@ define([
             history.back(1);
         },
 
+        getFormData: function() {
+            return this.serializeForm('form');
+        },
+
         saveButton: function() {
             event.preventDefault();
             this.removeSubViews();
-            var formData = this.serializeForm('form');
-            this.model.save(formData);
+            this.model.save(this.getFormData());
         },
 
         saveCompleted: function(model, response, options) {
