@@ -14,7 +14,7 @@
     "moment": "~2.5.1",
     "bootstrap3-datetimepicker": "~2.1.30",
     "select2": "~3.4.5",
-    "select2-bootstrap3-css": "~1.2.0",
+    "select2-bootstrap3-css": "https://github.com/fk/select2-bootstrap-css.git#f263e899fc0fcf7cf96df9f218488e67a349204b",
     "bootstrap-filestyle": "~1.0.3",
     "backbone-plugins": "https://github.com/nnance/backbone-plugins.git"
   },
