@@ -2,12 +2,11 @@
 
 define([
     'routes/routerbase',
-    'collections/news',
     'views/news/index',
     'views/news/list',
     'views/news/review',
     'views/news/form',
-], function (BaseRouter, NewsCollection, IndexView, ListView, ReviewView, FormView) {
+], function (BaseRouter, IndexView, ListView, ReviewView, FormView) {
     'use strict';
 
     var NewsRouter = BaseRouter.extend({
@@ -18,7 +17,6 @@ define([
             'news/update/:id': 'showEditForm',
             'news/filter/:value': 'showList'
         },
-        collectionType: NewsCollection,
         indexView: IndexView,
         listView: ListView,
         reviewView: ReviewView,

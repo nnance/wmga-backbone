@@ -12,10 +12,11 @@ define([
     'routes/users',
     'routes/teams',
     'routes/signup',
+    'datamanager',
     'collections/session',
     'views/app/header',
     'views/app/footer',
-], function ($, _, Backbone, BaseView, Router, NewsRouter, EventsRouter, ResultsRouter, UserRouter, TeamRouter, SignUpRouter, SessionCollection, HeaderView, FooterView) {
+], function ($, _, Backbone, BaseView, Router, NewsRouter, EventsRouter, ResultsRouter, UserRouter, TeamRouter, SignUpRouter, DataManager, SessionCollection, HeaderView, FooterView) {
     'use strict';
 
     var AppView = BaseView.extend({
@@ -42,18 +43,47 @@ define([
                 }
                 this.session = this.sessionCollection.at(0);
 
-                this.router = new Router({container: this.container, session: this.session});
-                this.newsRouter = new NewsRouter({container: this.container, session: this.session});
-                this.eventsRouter = new EventsRouter({container: this.container, session: this.session});
-                this.resultsRouter = new ResultsRouter({container: this.container, session: this.session});
-                this.teamRouter = new TeamRouter({container: this.container, session: this.session});
-                this.userRouter = new UserRouter({container: this.container, session: this.session});
-                this.signupRouter = new SignUpRouter({container: this.container, session: this.session});
+                this.dataManager = new DataManager({session: this.session});
 
-                if (this.session.get('signedIn')){
-                    this.session.validateSession();
-                }
-                Backbone.history.start();
+                this.router = new Router({
+                    container: this.container,
+                    dataManager: this.dataManager
+                });
+                this.newsRouter = new NewsRouter({
+                    container: this.container,
+                    dataManager: this.dataManager,
+                    collection: this.dataManager.newsCollection
+                });
+                this.eventsRouter = new EventsRouter({
+                    container: this.container,
+                    dataManager: this.dataManager,
+                    collection: this.dataManager.eventsCollection
+                });
+                this.resultsRouter = new ResultsRouter({
+                    container: this.container,
+                    dataManager: this.dataManager,
+                    collection: this.dataManager.resultsCollection
+                });
+                this.teamRouter = new TeamRouter({
+                    container: this.container,
+                    dataManager: this.dataManager,
+                    collection: this.dataManager.teamCollection
+                });
+                this.userRouter = new UserRouter({
+                    container: this.container,
+                    dataManager: this.dataManager,
+                    collection: this.dataManager.userCollection
+                });
+                this.signupRouter = new SignUpRouter({
+                    container: this.container,
+                    dataManager: this.dataManager,
+                    collection: this.dataManager.userCollection
+                });
+
+                this.session.validateSession()
+                .always(function(){
+                    Backbone.history.start();
+                });
             },this)});
         },
 

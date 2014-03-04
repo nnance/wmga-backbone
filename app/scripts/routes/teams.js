@@ -2,13 +2,11 @@
 
 define([
     'routes/routerbase',
-    'collections/team',
-    'collections/user',
     'views/teams/index',
     'views/teams/list',
     'views/teams/review',
     'views/teams/form',
-], function (BaseRouter, TeamCollection, UserCollection, IndexView, ListView, ReviewView, FormView) {
+], function (BaseRouter, IndexView, ListView, ReviewView, FormView) {
     'use strict';
 
     var TeamsRouter = BaseRouter.extend({
@@ -18,7 +16,6 @@ define([
             'teams/read/:id': 'showReview',
             'teams/update/:id': 'showEditForm',
         },
-        collectionType: TeamCollection,
         indexView: IndexView,
         listView: ListView,
         reviewView: ReviewView,
@@ -26,7 +23,7 @@ define([
 
         initialize: function() {
             BaseRouter.prototype.initialize.apply(this,arguments);
-            this.userCollection = new UserCollection();
+            this.userCollection = this.dataManager.userCollection;
         },
 
         loadList: function(route, params) {

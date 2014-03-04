@@ -2,12 +2,11 @@
 
 define([
     'routes/routerbase',
-    'collections/user',
     'views/users/index',
     'views/users/list',
     'views/users/review',
     'views/users/form',
-], function (BaseRouter, UserCollection, IndexView, ListView, ReviewView, FormView) {
+], function (BaseRouter, IndexView, ListView, ReviewView, FormView) {
     'use strict';
 
     var UsersRouter = BaseRouter.extend({
@@ -18,25 +17,10 @@ define([
             'users/update/:id': 'showEditForm',
             'membership': 'showMembership'
         },
-        collectionType: UserCollection,
         indexView: IndexView,
         listView: ListView,
         reviewView: ReviewView,
         formView: FormView,
-
-        initialize: function() {
-            BaseRouter.prototype.initialize.apply(this,arguments);
-            this.listenTo(this.session,'change:signedIn',this.refreshUsers);
-        },
-
-        refreshUsers: function() {
-            this.loaded = false;
-            if (this.session.get('signedIn')) {
-                this.loadList();
-            } else {
-                this.collection.reset();
-            }
-        },
 
         showMembership: function() {
             if (this.loaded) {

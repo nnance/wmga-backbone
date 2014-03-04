@@ -40,10 +40,13 @@ define([
                 password: user.get('passwordHash'),
                 admin: user.get('admin'),
                 treasure: user.get('treasure'),
-                paid: user.get('paid'),
-                signedIn: true
+                paid: user.get('paid')
             });
-            if (remember) this.save();
+            var promise;
+            if (remember) promise = this.save();
+            $.when(promise).done(_.bind(function(){
+                this.set('signedIn',true);
+            },this));
         },
 
         signout: function() {

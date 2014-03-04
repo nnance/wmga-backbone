@@ -18,14 +18,6 @@ define([
             'click #forgotPassword': 'sendPasswordEmail'
         },
 
-        initialize: function(options) {
-            FormBaseView.prototype.initialize.apply(this, arguments);
-            if (!options || !options.session)
-                throw new Error('missing required session option');
-
-            this.session = options.session;
-        },
-
         saveFailed: function(model, xhr, options) {
             if (xhr.responseText) {
                 this.handleErrors(model,{response: xhr.responseText});

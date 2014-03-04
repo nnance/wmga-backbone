@@ -12,10 +12,6 @@ define([
     var ListBaseView = BaseView.extend({
 
         initialize: function(options) {
-            BaseView.prototype.initialize.apply(this,arguments);
-            if (options && options.session) {
-                this.session = options.session;
-            }
             this.listenTo(this.collection, 'reset,sort', this.renderList);
             this.listenTo(this.collection, 'add', this.renderItem);
         },

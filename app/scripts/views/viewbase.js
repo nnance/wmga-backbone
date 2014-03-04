@@ -10,6 +10,12 @@ define([
     'use strict';
 
     var BaseView = Backbone.View.extend({
+        constructor: function(attributes, options) {
+            if (attributes && attributes.session) {
+                this.session = attributes.session;
+            }
+            Backbone.View.prototype.constructor.apply(this,arguments);
+        },
 
         render: function() {
             if (this.template) {

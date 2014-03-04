@@ -3,7 +3,6 @@
 define([
     'jquery',
     'backbone',
-    'collections/user',
     'models/user',
     'views/signup/index',
     'views/signup/typestep',
@@ -12,7 +11,7 @@ define([
     'views/signup/createstep',
     'views/signup/paynowstep',
     'views/signup/paynowcreatedstep',
-], function ($, Backbone, UserCollection, UserModel, IndexView, TypeStepView, EmailStepView, PasswordStepView, CreateStepView, PayNowStepView, PayNowCreatedView) {
+], function ($, Backbone, UserModel, IndexView, TypeStepView, EmailStepView, PasswordStepView, CreateStepView, PayNowStepView, PayNowCreatedView) {
     'use strict';
 
     var SignupRouter = Backbone.Router.extend({
@@ -23,8 +22,8 @@ define([
 
         initialize: function(options) {
             this.container = options.container;
-            this.session = options.session;
-            this.collection = new UserCollection();
+            this.session = options.dataManager.session;
+            this.collection = options.dataManager.userCollection;
             this.model = new UserModel();
 
             this.indexView = new IndexView();

@@ -2,12 +2,11 @@
 
 define([
     'routes/routerbase',
-    'collections/results',
     'views/results/index',
     'views/results/list',
     'views/results/review',
     'views/results/form',
-], function (BaseRouter, ResultsCollection, IndexView, ListView, ReviewView, FormView) {
+], function (BaseRouter, IndexView, ListView, ReviewView, FormView) {
     'use strict';
 
     var ResultsRouter = BaseRouter.extend({
@@ -18,7 +17,6 @@ define([
             'results/update/:id': 'showEditForm',
             'results/filter/:value': 'showList'
         },
-        collectionType: ResultsCollection,
         indexView: IndexView,
         listView: ListView,
         reviewView: ReviewView,

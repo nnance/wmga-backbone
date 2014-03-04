@@ -18,7 +18,6 @@ define([
             'events/update/:id': 'showEditForm',
             'events/filter/:value': 'showList'
         },
-        collectionType: EventColleciton,
         indexView: IndexView,
         listView: ListView,
         reviewView: ReviewView,

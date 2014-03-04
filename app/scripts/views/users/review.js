@@ -22,26 +22,27 @@ define([
             'click #delete-btn': 'showDeleteConfirm',
             'click #admin': 'setAdmin',
             'click #treasure': 'setTreasure',
-            'click #team-btn': 'registerTeam'
+            'click #team-btn': 'registerTeam',
+            'click #team-btn-edit': 'manageTeam'
         },
 
         initialize: function(options) {
             ReviewBaseView.prototype.initialize.apply(this, arguments);
-            this.teamCollection = options.teamCollection;
+            this.teamCollection = options.dataManager.teamCollection;
         },
 
         render: function() {
             ReviewBaseView.prototype.render.apply(this, arguments);
 
             var isSignedUser = this.session.get('userid') === this.model.id;
-            var isAdmin = this.session.get('admin');
 
-            if (isAdmin || isSignedUser) {
+            if (isSignedUser && !this.session.get('admin')) {
                 this.$('.btn-toolbar').append(this.editButtonsTemplate(this));
             }
             if (this.session.get('email') === 'nance.nick@gmail.com') {
-                this.$('#info').append(this.adminTemplate(this)).
-                append(this.treasureTemplate(this));
+                this.$('#info')
+                .append(this.adminTemplate(this))
+                .append(this.treasureTemplate(this));
             }
 
             if (this.model.get('paid') || !isSignedUser) {
@@ -52,6 +53,11 @@ define([
                 this.$('#team-btn-edit').remove();
             } else {
                 this.$('#team-btn').remove();
+
+                var team = this.teamCollection.get(this.model.get('teamid'));
+                if (!team || (this.session.get('userid') !== team.get('captainid'))) {
+                    this.$('#team-btn-edit').remove();
+                }
             }
             return this;
         },
@@ -94,6 +100,11 @@ define([
         registerTeam: function() {
             event.preventDefault();
             Backbone.history.navigate('#teams/create',true);
+        },
+
+        manageTeam: function() {
+            event.preventDefault();
+            Backbone.history.navigate('#teams/read/' + this.model.get('teamid'),true);
         }
     });
 

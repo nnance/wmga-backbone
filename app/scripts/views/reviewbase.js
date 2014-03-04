@@ -13,13 +13,6 @@ define([
 
     var ReviewBaseView = BaseView.extend({
 
-        initialize: function(options) {
-            BaseView.prototype.initialize.apply(this, arguments);
-            if (options && options.session) {
-                this.session = options.session;
-            }
-        },
-
         render: function(options) {
             BaseView.prototype.render.apply(this, arguments);
             if (this.editButtonsTemplate && this.session && this.session.get('admin')) {

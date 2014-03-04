@@ -17,7 +17,6 @@ define([
         signUpTemplate: JST['app/scripts/templates/home/signupbutton.ejs'],
 
         initialize: function(options) {
-            this.session = options.session;
             this.newsCollection = options.newsCol;
             this.eventsCollection = options.eventsCol;
             this.showSignUp = options.showSignUp;

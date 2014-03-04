@@ -3,14 +3,12 @@
 define([
     'jquery',
     'backbone',
-    'collections/news',
-    'collections/events',
     'models/signin',
     'views/home/index',
     'views/app/signin',
     'views/events/index',
     'views/app/contact',
-], function ($, Backbone, NewsCollection, EventsCollection, SignInModel, HomeView, SignInView, EventsView, ContactView) {
+], function ($, Backbone, SignInModel, HomeView, SignInView, EventsView, ContactView) {
     'use strict';
 
     var RouterRouter = Backbone.Router.extend({
@@ -25,9 +23,9 @@ define([
 
         initialize: function(options) {
             this.container = options.container;
-            this.session = options.session;
-            this.newsCollection = new NewsCollection();
-            this.eventsCollection = new EventsCollection();
+            this.session = options.dataManager.session;
+            this.newsCollection = options.dataManager.newsCollection;
+            this.eventsCollection = options.dataManager.eventsCollection;
 
             this.listenToOnce(this, 'route', this.LoadData);
             this.listenTo(this.session,'change:signedIn',this.checkRoute);

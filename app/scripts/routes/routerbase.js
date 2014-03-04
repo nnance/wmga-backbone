@@ -1,17 +1,18 @@
 /*global define*/
 
 define([
-    'jquery',
+    'underscore',
     'backbone',
-], function ($, Backbone) {
+], function (_, Backbone) {
     'use strict';
 
     var BaseRouter = Backbone.Router.extend({
 
         initialize: function(options) {
-            this.session = options.session;
             this.container = options.container;
-            this.collection = new this.collectionType();
+            this.dataManager = options.dataManager;
+            this.collection = options.collection;
+            this.session = options.dataManager.session;
 
             this.loaded = false;
             this.listenToOnce(this, 'route', this.loadList);
@@ -42,7 +43,8 @@ define([
             return new this.listView({
                 collection: this.collection,
                 filter: filter,
-                session: this.session
+                session: this.session,
+                dataManager: this.dataManager
             })
         },
 
@@ -56,7 +58,8 @@ define([
         createReviewView: function(model) {
             return new this.reviewView({
                 model: model,
-                session: this.session
+                session: this.session,
+                dataManager: this.dataManager
             })
         },
 
@@ -72,6 +75,7 @@ define([
                 model: model,
                 collection: this.collection,
                 session: this.session,
+                dataManager: this.dataManager,
                 queryParams: this.parseQueryString(queryParams)
             });
         },
