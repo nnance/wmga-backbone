@@ -8,7 +8,7 @@ define([
 
     var SessionModel = Backbone.Model.extend({
         defaults: {
-            signedIn: false
+            signedin: false
         },
 
         validateSession: function(email, password) {
@@ -40,21 +40,21 @@ define([
                 password: user.get('passwordHash'),
                 admin: user.get('admin'),
                 treasure: user.get('treasure'),
-                paid: user.get('paid')
+                paid: user.get('paid'),
+                signedin: true,
             });
-            var promise;
-            if (remember) promise = this.save();
-            $.when(promise).done(_.bind(function(){
-                this.set('signedIn',true);
-            },this));
+            if (remember) this.save();
+            this.trigger('signedin');
         },
 
         signout: function() {
             this.save({
-                signedIn: false,
+                signedin: false,
                 admin: false,
                 treasure: false,
+                remember: false
             });
+            this.trigger('signedout');
         },
     });
 

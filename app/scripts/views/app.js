@@ -40,22 +40,30 @@ define([
             this.sessionCollection.fetch()
             .done(_.bind(function(){
                 if (this.sessionCollection.length === 0) {
-                    this.sessionCollection.create({signedIn: false});
+                    this.sessionCollection.create();
                 }
                 this.session = this.sessionCollection.at(0);
 
                 this.dataManager = new DataManager({session: this.session});
 
-                this.session.validateSession()
-                .always(_.bind(function(){
-                    this.dataManager.loadData(
-                        _.bind(this.startRouters,this)
-                    );
-                },this));
+                this.createRouters();
+
+                if (this.session.get('signedin')) {
+                    this.listenToOnce(this.session,'signedin',this.initData);
+                    this.session.validateSession();
+                } else {
+                    this.initData();
+                }
             },this));
         },
 
-        startRouters: function() {
+        initData: function() {
+            this.dataManager.loadData(function() {
+                Backbone.history.start();
+            });
+        },
+
+        createRouters: function() {
             this.router = new Router({
                 container: this.container,
                 dataManager: this.dataManager
@@ -91,7 +99,6 @@ define([
                 collection: this.dataManager.userCollection
             });
 
-            Backbone.history.start();
         },
 
         updateTracking: function(router, route, params) {

@@ -18,6 +18,11 @@ define([
             'click #forgotPassword': 'sendPasswordEmail'
         },
 
+        initialize: function(options) {
+            FormBaseView.prototype.initialize.apply(this, arguments);
+            this.dataManager = options.dataManager;
+        },
+
         saveFailed: function(model, xhr, options) {
             if (xhr.responseText) {
                 this.handleErrors(model,{response: xhr.responseText});
@@ -27,9 +32,14 @@ define([
         },
 
         saveCompleted: function(model, response, options) {
-            var remember = this.$('input:checkbox:checked').val();
-            this.session.signin(model, remember);
-            history.back(1);
+            this.listenToOnce(this.session,'signedin', this.initData);
+            this.session.signin(model, model.has('rememberMe'));
+        },
+
+        initData: function() {
+            this.dataManager.loadData(function(){
+                history.back(1);
+            });
         },
 
         sendPasswordEmail: function() {

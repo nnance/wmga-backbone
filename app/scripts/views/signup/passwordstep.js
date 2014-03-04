@@ -22,11 +22,9 @@ define([
             event.preventDefault();
             this.model.set(this.serializeForm('form'));
 
-            this.listenTo(this.session, 'change:signedIn', this.nextStepSuccess);
-            this.session.validateSession(
-                this.model.get('email'), this.model.get('password')
-            ).
-            fail( _.bind(function(jqXHR, textStatus, errorThrown) {
+            this.listenToOnce(this.session, 'signedin', this.nextStepSuccess);
+            this.session.validateSession(this.model.get('email'), this.model.get('password'))
+            .fail( _.bind(function(jqXHR, textStatus, errorThrown) {
                 this.handleErrors(this.model, {response: 'password does not match'});
             },this));
 

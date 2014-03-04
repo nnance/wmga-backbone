@@ -24,10 +24,11 @@ define([
         initialize: function(options) {
             this.container = options.container;
             this.session = options.dataManager.session;
+            this.dataManager = options.dataManager;
             this.newsCollection = options.dataManager.newsCollection;
             this.eventsCollection = options.dataManager.eventsCollection;
 
-            this.listenTo(this.session,'change:signedIn',this.checkRoute);
+            this.listenTo(this.session,'signedout',this.routeHome);
         },
 
         showHome: function(showSignUp) {
@@ -42,7 +43,7 @@ define([
 
         showSignIn: function() {
             var signIn = new SignInModel();
-            var view = new SignInView({model: signIn, session: this.session});
+            var view = new SignInView({model: signIn, session: this.session, dataManager: this.dataManager});
             this.container.setView(view.render());
         },
 
@@ -56,10 +57,8 @@ define([
             view.postRender();
         },
 
-        checkRoute: function() {
-            if (!this.session.get('signedIn')) {
-                Backbone.history.navigate('#home',true);
-            }
+        routeHome: function() {
+            Backbone.history.navigate('#home',true);
         }
     });
 

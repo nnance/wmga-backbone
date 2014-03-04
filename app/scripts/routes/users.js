@@ -23,7 +23,7 @@ define([
         formView: FormView,
 
         showMembership: function() {
-            if (this.session.has('userid') && this.session.get('signedIn')) {
+            if (this.session.has('userid') && this.session.get('signedin')) {
                 this.showReview(this.session.get('userid'));
             } else {
                 Backbone.history.navigate('#home',true);

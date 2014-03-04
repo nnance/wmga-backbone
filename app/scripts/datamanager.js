@@ -25,8 +25,6 @@ define([
             this.resultsCollection = new Results();
             this.userCollection = new Users();
             this.teamCollection = new Teams();
-
-            // this.listenTo(this.session, 'change:signedIn', this.loadSecureData);
         },
 
         loadData: function(callback) {
@@ -39,25 +37,33 @@ define([
                 this.newsCollection.fetch(options),
                 this.resultsCollection.fetch(options)
             ]
-            if (this.session.get('signedIn')) {
+            if (this.session.get('signedin')) {
                 deferreds.push(this.userCollection.fetch(options));
                 deferreds.push(this.teamCollection.fetch(options));
             }
+            this.initiateLoad(deferreds, callback);
+            return deferreds;
+        },
+
+        initiateLoad: function(deferreds, callback) {
             this.loadCount = deferreds.length;
             this.loadCallback = callback;
-            return deferreds;
         },
 
         loadCompleted: function() {
             this.loadCount = this.loadCount - 1;
-            if (this.loadCount === 0) this.loadCallback.call(this);
+            if (this.loadCount === 0) {
+                this.loadCallback.call(this);
+            }
         },
 
-        loadSecureData: function(model,value,options) {
-            if (value) {
-                this.userCollection.fetch();
-                this.teamCollection.fetch();
-            }
+        loadSecureData: function(callback) {
+            var deferreds = [
+                this.userCollection.fetch(),
+                this.teamCollection.fetch()
+            ];
+            this.initiateLoad(deferreds, callback);
+            return deferreds;
         }
     });
 

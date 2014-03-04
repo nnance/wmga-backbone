@@ -29,20 +29,19 @@ define([
 
         loadCompleted: function() {
             this.model = this.collection.at(0);
-            this.listenTo(this.model, 'change:signedIn', this.render);
+            this.listenTo(this.model, 'change:signedin', this.render);
             this.render();
         },
 
         render: function() {
             BaseView.prototype.render.apply(this,arguments);
-            if (this.model && this.model.get('signedIn')) {
+            if (this.model && this.model.get('signedin')) {
                 this.$('.navbar-collapse').append(this.signedInTemplate( this ));
             } else {
                 this.$('#nav-users').hide();
                 this.$('#nav-teams').hide();
                 this.$('.navbar-collapse').append(this.userTemplate( this ));
             }
-
             this.highlighItem();
             return this;
         },
