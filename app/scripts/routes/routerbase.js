@@ -13,19 +13,6 @@ define([
             this.dataManager = options.dataManager;
             this.collection = options.collection;
             this.session = options.dataManager.session;
-
-            this.loaded = false;
-            this.listenToOnce(this, 'route', this.loadList);
-        },
-
-        loadList: function(route, params) {
-            this.collection.fetch()
-            .always(_.bind(function(){
-                this.loaded = true;
-                if (route) {
-                    this[route].apply(this,params);
-                }
-            },this));
         },
 
         showView: function(view) {
@@ -34,9 +21,7 @@ define([
         },
 
         showList: function(filter) {
-            if (this.loaded) {
-                this.showView(this.createListView(filter));
-            }
+            this.showView(this.createListView(filter));
         },
 
         createListView: function(filter) {
@@ -49,10 +34,8 @@ define([
         },
 
         showReview: function(id) {
-            if (this.loaded) {
-                var model = this.collection.get(id);
-                this.showView(this.createReviewView(model));
-            }
+            var model = this.collection.get(id);
+            this.showView(this.createReviewView(model));
         },
 
         createReviewView: function(model) {
@@ -64,10 +47,8 @@ define([
         },
 
         showAddForm: function(queryParams) {
-            if (this.loaded) {
-                var model = new this.collection.model();
-                this.showView(this.createFormView(model, queryParams));
-            }
+            var model = new this.collection.model();
+            this.showView(this.createFormView(model, queryParams));
         },
 
         createFormView: function(model, queryParams) {
@@ -81,10 +62,8 @@ define([
         },
 
         showEditForm: function(id) {
-            if (this.loaded) {
-                var model = this.collection.get(id);
-                this.showView(this.createFormView(model));
-            }
+            var model = this.collection.get(id);
+            this.showView(this.createFormView(model));
         },
 
         parseQueryString: function( queryString ) {

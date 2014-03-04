@@ -23,12 +23,10 @@ define([
         formView: FormView,
 
         showMembership: function() {
-            if (this.loaded) {
-                if (this.session.has('userid') && this.session.get('signedIn')) {
-                    this.showReview(this.session.get('userid'));
-                } else {
-                    Backbone.history.navigate('#home',true);
-                }
+            if (this.session.has('userid') && this.session.get('signedIn')) {
+                this.showReview(this.session.get('userid'));
+            } else {
+                Backbone.history.navigate('#home',true);
             }
         }
     });

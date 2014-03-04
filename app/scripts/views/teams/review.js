@@ -27,7 +27,7 @@ define([
 
         initialize: function(options){
             ReviewBaseView.prototype.initialize.apply(this,arguments);
-            this.userCollection = options.userCollection;
+            this.userCollection = options.dataManager.userCollection;
         },
 
         render: function() {

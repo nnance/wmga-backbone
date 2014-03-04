@@ -27,13 +27,7 @@ define([
             this.newsCollection = options.dataManager.newsCollection;
             this.eventsCollection = options.dataManager.eventsCollection;
 
-            this.listenToOnce(this, 'route', this.LoadData);
             this.listenTo(this.session,'change:signedIn',this.checkRoute);
-        },
-
-        LoadData: function() {
-            this.newsCollection.fetch();
-            this.eventsCollection.fetch();
         },
 
         showHome: function(showSignUp) {

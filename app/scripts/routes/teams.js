@@ -21,42 +21,6 @@ define([
         reviewView: ReviewView,
         formView: FormView,
 
-        initialize: function() {
-            BaseRouter.prototype.initialize.apply(this,arguments);
-            this.userCollection = this.dataManager.userCollection;
-        },
-
-        loadList: function(route, params) {
-            var colReq = this.collection.fetch();
-            var userReq = this.userCollection.fetch();
-
-            $.when(colReq, userReq).done(_.bind(function(){
-                this.loaded = true;
-                if (route) {
-                    this[route].apply(this,params);
-                }
-            },this));
-        },
-
-        createReviewView: function(model) {
-            return new this.reviewView({
-                model: model,
-                userCollection: this.userCollection,
-                session: this.session
-            })
-        },
-
-        createFormView: function(model, queryParams) {
-            return new this.formView({
-                model: model,
-                collection: this.collection,
-                userCollection: this.userCollection,
-                session: this.session,
-                queryParams: this.parseQueryString(queryParams)
-            });
-        },
-
-
     });
 
     return TeamsRouter;

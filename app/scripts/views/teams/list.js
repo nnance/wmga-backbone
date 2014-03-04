@@ -13,7 +13,7 @@ define([
 
     var TeamsListView = ListBaseView.extend({
         template: JST['app/scripts/templates/teams/list.ejs'],
-        addButtonTemplate: JST['app/scripts/templates/teams/addbutton.ejs'],
+        // addButtonTemplate: JST['app/scripts/templates/teams/addbutton.ejs'],
 
         events: {
             'click #filter': 'switchFilter',

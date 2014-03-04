@@ -37,7 +37,8 @@ define([
         },
 
         initSession: function() {
-            this.sessionCollection.fetch({success: _.bind(function(){
+            this.sessionCollection.fetch()
+            .done(_.bind(function(){
                 if (this.sessionCollection.length === 0) {
                     this.sessionCollection.create({signedIn: false});
                 }
@@ -45,46 +46,52 @@ define([
 
                 this.dataManager = new DataManager({session: this.session});
 
-                this.router = new Router({
-                    container: this.container,
-                    dataManager: this.dataManager
-                });
-                this.newsRouter = new NewsRouter({
-                    container: this.container,
-                    dataManager: this.dataManager,
-                    collection: this.dataManager.newsCollection
-                });
-                this.eventsRouter = new EventsRouter({
-                    container: this.container,
-                    dataManager: this.dataManager,
-                    collection: this.dataManager.eventsCollection
-                });
-                this.resultsRouter = new ResultsRouter({
-                    container: this.container,
-                    dataManager: this.dataManager,
-                    collection: this.dataManager.resultsCollection
-                });
-                this.teamRouter = new TeamRouter({
-                    container: this.container,
-                    dataManager: this.dataManager,
-                    collection: this.dataManager.teamCollection
-                });
-                this.userRouter = new UserRouter({
-                    container: this.container,
-                    dataManager: this.dataManager,
-                    collection: this.dataManager.userCollection
-                });
-                this.signupRouter = new SignUpRouter({
-                    container: this.container,
-                    dataManager: this.dataManager,
-                    collection: this.dataManager.userCollection
-                });
-
                 this.session.validateSession()
-                .always(function(){
-                    Backbone.history.start();
-                });
-            },this)});
+                .always(_.bind(function(){
+                    this.dataManager.loadData(
+                        _.bind(this.startRouters,this)
+                    );
+                },this));
+            },this));
+        },
+
+        startRouters: function() {
+            this.router = new Router({
+                container: this.container,
+                dataManager: this.dataManager
+            });
+            this.newsRouter = new NewsRouter({
+                container: this.container,
+                dataManager: this.dataManager,
+                collection: this.dataManager.newsCollection
+            });
+            this.eventsRouter = new EventsRouter({
+                container: this.container,
+                dataManager: this.dataManager,
+                collection: this.dataManager.eventsCollection
+            });
+            this.resultsRouter = new ResultsRouter({
+                container: this.container,
+                dataManager: this.dataManager,
+                collection: this.dataManager.resultsCollection
+            });
+            this.teamRouter = new TeamRouter({
+                container: this.container,
+                dataManager: this.dataManager,
+                collection: this.dataManager.teamCollection
+            });
+            this.userRouter = new UserRouter({
+                container: this.container,
+                dataManager: this.dataManager,
+                collection: this.dataManager.userCollection
+            });
+            this.signupRouter = new SignUpRouter({
+                container: this.container,
+                dataManager: this.dataManager,
+                collection: this.dataManager.userCollection
+            });
+
+            Backbone.history.start();
         },
 
         updateTracking: function(router, route, params) {

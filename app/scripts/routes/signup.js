@@ -35,11 +35,6 @@ define([
                 paynow: PayNowStepView,
                 createpaynow: PayNowCreatedView
             };
-            this.listenToOnce(this, 'route', this.loadList);
-        },
-
-        loadList: function(route, params) {
-            this.collection.fetch();
         },
 
         showSignup: function(step) {
