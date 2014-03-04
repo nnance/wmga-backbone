@@ -27,11 +27,15 @@ define([
             this.teamCollection = new Teams();
         },
 
-        loadData: function(callback) {
-            var options = {
+        getLoadOptions: function() {
+            return {
                 success: _.bind(this.loadCompleted,this),
                 failure: _.bind(this.loadCompleted,this)
             };
+        },
+
+        loadData: function(callback) {
+            var options = this.getLoadOptions();
             var deferreds = [
                 this.eventsCollection.fetch(options),
                 this.newsCollection.fetch(options),
@@ -58,9 +62,10 @@ define([
         },
 
         loadSecureData: function(callback) {
+            var options = this.getLoadOptions();
             var deferreds = [
-                this.userCollection.fetch(),
-                this.teamCollection.fetch()
+                this.userCollection.fetch(options),
+                this.teamCollection.fetch(options)
             ];
             this.initiateLoad(deferreds, callback);
             return deferreds;

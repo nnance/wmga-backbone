@@ -37,9 +37,9 @@ define([
         },
 
         initData: function() {
-            this.dataManager.loadData(function(){
-                history.back(1);
-            });
+            this.dataManager.loadSecureData(_.bind(function(){
+                Backbone.history.navigate('#membership',true);
+            },this));
         },
 
         sendPasswordEmail: function() {
