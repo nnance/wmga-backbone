@@ -22,6 +22,7 @@ define([
 
         initialize: function(options) {
             this.container = options.container;
+            this.dataManager = options.dataManager;
             this.session = options.dataManager.session;
             this.collection = options.dataManager.userCollection;
             this.model = new UserModel();
@@ -49,7 +50,7 @@ define([
                     this.model = new UserModel();
                     this.container.setView(this.indexView.render());
                 }
-                var view = new ViewType({model: this.model, collection: this.collection, session: this.session});
+                var view = new ViewType({model: this.model, collection: this.collection, session: this.session, dataManager: this.dataManager});
                 this.indexView.removeSubViews();
                 this.indexView.insertView(view.render(),'#stepContent');
             }

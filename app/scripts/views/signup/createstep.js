@@ -17,6 +17,11 @@ define([
             'click .btn-default': 'createStep'
         },
 
+        initialize: function(options) {
+            BaseFormView.prototype.initialize.apply(this,arguments);
+            this.dataManager = options.dataManager;
+        },
+
         nextStep: function() {
             event.preventDefault();
 
@@ -44,8 +49,8 @@ define([
             } else {
                 this.model.save({},{
                     success: _.bind(function() {
+                        this.listenToOnce(this.session,'signedin', this.initData);
                         this.session.signin(this.model,true);
-                        Backbone.history.navigate('#signup/createpaynow', true);
                     },this),
                     error: _.bind(function(model, response, options) {
                         this.handleError(model, response);
@@ -53,6 +58,12 @@ define([
                 });
             }
 
+        },
+
+        initData: function() {
+            this.dataManager.loadSecureData(_.bind(function(){
+                Backbone.history.navigate('#signup/createpaynow', true);
+            },this));
         },
 
         nextStepError: function(col, resp, opt) {
