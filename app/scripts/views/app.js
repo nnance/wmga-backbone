@@ -37,24 +37,28 @@ define([
         },
 
         initSession: function() {
-            this.sessionCollection.fetch()
-            .done(_.bind(function(){
-                if (this.sessionCollection.length === 0) {
-                    this.sessionCollection.create();
-                }
-                this.session = this.sessionCollection.at(0);
+            this.sessionCollection.fetch({
+                success: _.bind(this.completeInit, this),
+                error: _.bind(this.completeInit, this)
+            });
+        },
 
-                this.dataManager = new DataManager({session: this.session});
+        completeInit: function() {
+            if (this.sessionCollection.length === 0) {
+                this.sessionCollection.create();
+            }
+            this.session = this.sessionCollection.at(0);
 
-                this.createRouters();
+            this.dataManager = new DataManager({session: this.session});
 
-                if (this.session.get('signedin')) {
-                    this.listenToOnce(this.session,'signedin',this.initData);
-                    this.session.validateSession();
-                } else {
-                    this.initData();
-                }
-            },this));
+            this.createRouters();
+
+            if (this.session.get('signedin')) {
+                this.listenToOnce(this.session,'signedin',this.initData);
+                this.session.validateSession();
+            } else {
+                this.initData();
+            }
         },
 
         initData: function() {

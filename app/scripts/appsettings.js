@@ -3,7 +3,7 @@ define([], function () {
 
     var AppSettings = {
   		getBaseURL: function() {
-            if (window.location.hostname === 'localhost') {
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
                 return 'http://localhost:3000';
             } else {
                 return '';
