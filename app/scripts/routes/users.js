@@ -2,11 +2,13 @@
 
 define([
     'routes/routerbase',
+    'models/email',
     'views/users/index',
     'views/users/list',
     'views/users/review',
     'views/users/form',
-], function (BaseRouter, IndexView, ListView, ReviewView, FormView) {
+    'views/users/email',
+], function (BaseRouter, EmailModel, IndexView, ListView, ReviewView, FormView, EmailView) {
     'use strict';
 
     var UsersRouter = BaseRouter.extend({
@@ -15,7 +17,8 @@ define([
             'users/create': 'showAddForm',
             'users/read/:id': 'showReview',
             'users/update/:id': 'showEditForm',
-            'membership': 'showMembership'
+            'membership': 'showMembership',
+            'users/email': 'showEmailForm'
         },
         indexView: IndexView,
         listView: ListView,
@@ -28,7 +31,16 @@ define([
             } else {
                 Backbone.history.navigate('#home',true);
             }
-        }
+        },
+
+        showEmailForm: function() {
+            var view = new EmailView({
+                model: new EmailModel(),
+                session: this.session,
+                dataManager: this.dataManager
+            })
+            this.showView(view);
+        },
     });
 
     return UsersRouter;
