@@ -267,6 +267,10 @@ module.exports = function (grunt) {
                         'images/{,*/}*.{webp,gif}',
                         'styles/fonts/{,*/}*.*',
                         'bower_components/sass-bootstrap/fonts/*.*',
+                        'bower_components/bootstrap3-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
+                        'bower_components/select2/select2.css',
+                        'bower_components/select2/*.png',
+                        'bower_components/select2/*.gif',
                         'beta/index.html'
                     ]
                 }]
