@@ -18,7 +18,7 @@ define([
 
         initialize: function(options) {
             FormBaseView.prototype.initialize.apply(this, arguments);
-            this.userCollection = options.userCollection;
+            this.userCollection = options.dataManager.userCollection;
 
             if (this.model.isNew()) {
                 this.originalMembers = [];

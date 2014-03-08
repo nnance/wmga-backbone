@@ -18,6 +18,7 @@ define([
             if (this.editButtonsTemplate && this.session && this.session.get('admin')) {
                 this.$('.btn-toolbar').append(this.editButtonsTemplate(this));
             }
+            this.listenTo(this.model,'change',this.render);
             return this;
         },
 

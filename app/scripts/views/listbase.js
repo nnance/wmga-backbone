@@ -21,7 +21,7 @@ define([
             if (this.addButtonTemplate && this.session && this.session.get('admin')) {
                 var inputGroup = this.$('.input-group');
                 var btnGroup = this.$('.btn-group');
-                if (inputGroup) {
+                if (inputGroup.length > 0) {
                     inputGroup.append(this.addButtonTemplate(this));
                 } else {
                     btnGroup.append(this.addButtonTemplate(this));

@@ -9,6 +9,15 @@
     </p>
     <abbr title="Phone">P:</abbr> <%= model.get('phone') %><br/>
     <p>Photo: <a href="<%= getFileUrl() %>"><%= model.get('photo') %></a></p>
+    <label class="checkbox">
+        <input type="checkbox" id="mark-paid" <%= model.get('paid') ? 'checked' : '' %>> Mark Paid
+    </label>
+    <label class="checkbox">
+        <input type="checkbox" id="admin" <%= model.get('admin') ? 'checked' : '' %>> Make Administrator
+    </label>
+    <label class="checkbox">
+        <input type="checkbox" id="treasure" <%= model.get('treasure') ? 'checked' : '' %>> Make Treasure
+    </label>
 </div>
 <div id="dues">
     <div class="page-header">

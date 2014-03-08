@@ -28,6 +28,9 @@ define([
                     required: true,
                     pattern: 'email'
                 },
+            },
+
+            registrationValidation: {
                 password: {
                     required: true
                 },

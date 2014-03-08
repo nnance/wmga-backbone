@@ -14,12 +14,10 @@ define([
 
     var UsersDetailView = ReviewBaseView.extend({
         template: JST['app/scripts/templates/users/review.ejs'],
-        editButtonsTemplate: JST['app/scripts/templates/users/editbuttons.ejs'],
-        adminTemplate: JST['app/scripts/templates/users/reviewadmin.ejs'],
-        treasureTemplate: JST['app/scripts/templates/users/reviewtreasure.ejs'],
 
         events: {
             'click #delete-btn': 'showDeleteConfirm',
+            'click #mark-paid': 'setPaid',
             'click #admin': 'setAdmin',
             'click #treasure': 'setTreasure',
             'click #team-btn': 'registerTeam',
@@ -39,10 +37,13 @@ define([
             if (isSignedUser && !this.session.get('admin')) {
                 this.$('.btn-toolbar').append(this.editButtonsTemplate(this));
             }
-            if (this.session.get('email') === 'nance.nick@gmail.com') {
-                this.$('#info')
-                .append(this.adminTemplate(this))
-                .append(this.treasureTemplate(this));
+            if (this.session.get('email') !== 'nance.nick@gmail.com') {
+                this.$('#admin').parent().remove();
+                this.$('#treasure').parent().remove();
+            }
+
+            if (!this.session.get('treasure')) {
+                this.$('#mark-paid').parent().remove();
             }
 
             if (this.model.get('paid') || !isSignedUser) {
@@ -81,20 +82,19 @@ define([
             view.show();
         },
 
+        setPaid: function() {
+            event.preventDefault();
+            this.model.save({paid: event.target.checked});
+        },
+
         setAdmin: function() {
             event.preventDefault();
             this.model.save({admin: event.target.checked});
-            if (this.session.get('userid') === this.model.id) {
-                this.session.signin(this.model);
-            }
         },
 
         setTreasure: function() {
             event.preventDefault();
             this.model.save({treasure: event.target.checked});
-            if (this.session.get('userid') === this.model.id) {
-                this.session.signin(this.model);
-            }
         },
 
         registerTeam: function() {

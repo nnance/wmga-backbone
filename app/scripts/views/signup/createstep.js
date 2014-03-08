@@ -28,6 +28,8 @@ define([
             this.removeSubViews();
             var formData = this.serializeForm('form');
 
+            debugger;
+            this.model.validation = _.extend(this.model.validation, this.model.registrationValidation);
             this.model.set(formData, {validate: true});
             if (this.model.isValid()) {
                 this.collection.fetch({data: {email: formData.email},
