@@ -5,9 +5,10 @@ define([
     'underscore',
     'backbone',
     'templates',
+    'models/signin',
     'models/requestpassword',
     'views/formbase'
-], function ($, _, Backbone, JST, RequestPassword, BaseFormView) {
+], function ($, _, Backbone, JST, SignInModel, RequestPassword, BaseFormView) {
     'use strict';
 
     var PasswordStepView = BaseFormView.extend({
@@ -18,24 +19,34 @@ define([
             'click #forgotPassword': 'sendPasswordEmail'
         },
 
+        initialize: function(options) {
+            BaseFormView.prototype.initialize.apply(this,arguments);
+            this.dataManager = options.dataManager;
+        },
+
         nextStep: function() {
             event.preventDefault();
             this.model.set(this.serializeForm('form'));
 
-            this.listenToOnce(this.session, 'signedin', this.nextStepSuccess);
-            this.session.validateSession(this.model.get('email'), this.model.get('password'))
+            this.session.validateAccount(this.model.get('email'), this.model.get('password'))
+            .done( _.bind(function(data, textStatus, jqXHR){
+                this.nextStepSuccess(data);
+            },this))
             .fail( _.bind(function(jqXHR, textStatus, errorThrown) {
                 this.handleErrors(this.model, {response: 'password does not match'});
             },this));
 
         },
 
-        nextStepSuccess: function() {
-            var url = '#signup/paynow';
-            if (this.session.get('paid')) {
-                url = '#membership';
-            }
-            Backbone.history.navigate(url, true);
+        nextStepSuccess: function(data) {
+            this.session.signin(data,true);
+            this.dataManager.loadSecureData(_.bind(function(){
+                var url = '#signup/paynow';
+                if (this.session.get('paid')) {
+                    url = '#membership';
+                }
+                Backbone.history.navigate(url, true);
+            },this));
         },
 
         sendPasswordEmail: function() {

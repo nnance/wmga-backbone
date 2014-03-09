@@ -33,7 +33,7 @@ define([
 
         saveCompleted: function(model, response, options) {
             this.listenToOnce(this.session,'signedin', this.initData);
-            this.session.signin(model, model.has('rememberMe'));
+            this.session.signin(model.attributes, model.has('rememberMe'));
         },
 
         initData: function() {

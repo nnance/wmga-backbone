@@ -14,6 +14,7 @@ define([
 
     var UsersDetailView = ReviewBaseView.extend({
         template: JST['app/scripts/templates/users/review.ejs'],
+        editButtonsTemplate: JST['app/scripts/templates/users/editbuttons.ejs'],
 
         events: {
             'click #delete-btn': 'showDeleteConfirm',

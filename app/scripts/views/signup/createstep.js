@@ -28,7 +28,6 @@ define([
             this.removeSubViews();
             var formData = this.serializeForm('form');
 
-            debugger;
             this.model.validation = _.extend(this.model.validation, this.model.registrationValidation);
             this.model.set(formData, {validate: true});
             if (this.model.isValid()) {
@@ -52,7 +51,7 @@ define([
                 this.model.save({},{
                     success: _.bind(function() {
                         this.listenToOnce(this.session,'signedin', this.initData);
-                        this.session.signin(this.model,true);
+                        this.session.signin(this.model.attributes,true);
                     },this),
                     error: _.bind(function(model, response, options) {
                         this.handleError(model, response);
