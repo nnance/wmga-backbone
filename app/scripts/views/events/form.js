@@ -18,8 +18,12 @@ define([
         render: function() {
             FormBaseView.prototype.render.apply(this,arguments);
 
-            this.$('#startdatepicker').datetimepicker();
-            this.$('#enddatepicker').datetimepicker();
+            this.$('#startdatepicker').datetimepicker({
+                pickTime: false
+            });
+            this.$('#enddatepicker').datetimepicker({
+                pickTime: false
+            });
             this.filestyle({
                 selector: '#attachedfile',
                 binding: 'attachedfile',

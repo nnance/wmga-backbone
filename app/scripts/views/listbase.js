@@ -24,7 +24,7 @@ define([
                 if (inputGroup.length > 0) {
                     inputGroup.append(this.addButtonTemplate(this));
                 } else {
-                    btnGroup.append(this.addButtonTemplate(this));
+                    btnGroup.after(this.addButtonTemplate(this));
                 }
             }
             this.renderList();

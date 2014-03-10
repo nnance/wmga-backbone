@@ -53,7 +53,7 @@ define([
         },
 
         renderItem: function(model) {
-            if (model.getAsDate('itemdate') < this.filter.start && model.getAsDate('itemdate') > this.filter.end) {
+            if (model.getAsDate('itemdate').isBefore(this.filter.start) && model.getAsDate('itemdate').isAfter(this.filter.end)) {
                 var view = new ItemView({model: model});
                 this.insertView(view.render(),'.container');
             }
