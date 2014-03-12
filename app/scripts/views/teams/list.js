@@ -33,19 +33,14 @@ define([
         },
 
         renderItem: function(model) {
-            var view = new ItemView({model: model, collection: this.dataManager.userCollection});
+            var view = new ItemView({model: model});
             this.insertView(view.render(),'table');
             this.renderMembers(model);
         },
 
         renderMembers: function(model) {
-            _.each(model.get('members'), function(id, index){
-                var member = this.dataManager.userCollection.get(id);
-                if ((index > 0) && _.isObject(member)) {
-                    var view = new MemberView({model: member});
-                    this.insertView(view.render(),'table');
-                }
-            }.bind(this), this);
+            var view = new MemberView({model: model, collection: this.dataManager.userCollection});
+            this.insertView(view.render(),'table');
         },
 
         filterTeams: function() {

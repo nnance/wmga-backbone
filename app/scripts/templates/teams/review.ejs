@@ -6,6 +6,9 @@
     </div>
     <h4><%= model.get('name') %></h4>
     <p>Captain: <%= getCaptainName() %></p>
+    <p>Tee Time: <%= model.get('teetime') %></p>
+    <p>Comments:</p>
+    <p><%= model.get('comments') %></p>
     <p>Photo: <a href="<%= getFileUrl() %>"><%= model.get('photo') %></a></p>
 </div>
 <div id="team">
