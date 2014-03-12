@@ -22,6 +22,7 @@ define([
 
             if (this.model.isNew()) {
                 this.originalMembers = [];
+                this.model.set('members', [this.session.get('userid')]);
                 this.model.set('captainid', this.session.get('userid'));
             } else {
                 this.originalMembers = this.model.get('members');
@@ -64,7 +65,9 @@ define([
                     formData.members = [];
                 }
             }
-            formData.members = _.union(formData.members,[this.session.get('userid')]);
+            if (this.session.get('userid') === this.model.get('captainid')) {
+                formData.members = _.union(formData.members,[this.session.get('userid')]);
+            }
             return formData;
         },
 
