@@ -7,13 +7,14 @@ define([
     'templates',
     'views/listbase',
     'moment',
-    'views/teams/listitem'
-], function ($, _, Backbone, JST, ListBaseView, Moment, ItemView) {
+    'views/teams/listitem',
+    'views/teams/listitemmember'
+], function ($, _, Backbone, JST, ListBaseView, Moment, ItemView, MemberView) {
     'use strict';
 
     var TeamsListView = ListBaseView.extend({
         template: JST['app/scripts/templates/teams/list.ejs'],
-        // addButtonTemplate: JST['app/scripts/templates/teams/addbutton.ejs'],
+        addButtonTemplate: JST['app/scripts/templates/teams/addbutton.ejs'],
 
         events: {
             'click #filter': 'switchFilter',
@@ -32,8 +33,19 @@ define([
         },
 
         renderItem: function(model) {
-            var view = new ItemView({model: model});
+            var view = new ItemView({model: model, collection: this.dataManager.userCollection});
             this.insertView(view.render(),'table');
+            this.renderMembers(model);
+        },
+
+        renderMembers: function(model) {
+            _.each(model.get('members'), function(id, index){
+                var member = this.dataManager.userCollection.get(id);
+                if ((index > 0) && _.isObject(member)) {
+                    var view = new MemberView({model: member});
+                    this.insertView(view.render(),'table');
+                }
+            }.bind(this), this);
         },
 
         filterTeams: function() {

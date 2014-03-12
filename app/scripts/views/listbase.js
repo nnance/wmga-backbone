@@ -12,6 +12,7 @@ define([
     var ListBaseView = BaseView.extend({
 
         initialize: function(options) {
+            this.dataManager = options.dataManager;
             this.listenTo(this.collection, 'reset,sort', this.renderList);
             this.listenTo(this.collection, 'add', this.renderItem);
         },

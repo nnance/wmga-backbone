@@ -66,7 +66,7 @@ define([
         getCaptainName: function() {
             if (this.model.has('captainid')) {
                 var user = this.userCollection.get(this.model.get('captainid'));
-                return user.getFullName();
+                return _.isObject(user) ? user.getFullName() : '';
             }
         },
 
