@@ -18,13 +18,13 @@ define([
             'click .btn-default': 'skipStep'
         },
 
-        nextStep: function() {
-            event.preventDefault();
+        nextStep: function(e) {
+            e.preventDefault();
             window.location.href = AppSettings.membershipPayNow + this.model.get('email');
         },
 
-        skipStep: function() {
-            event.preventDefault();
+        skipStep: function(e) {
+            e.preventDefault();
             Backbone.history.navigate('#membership', true);
         },
     });

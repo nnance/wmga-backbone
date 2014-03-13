@@ -40,8 +40,8 @@ define([
             this.insertView(view.render(),'table');
         },
 
-        filterUsers: function() {
-            var filter = event.target.value;
+        filterUsers: function(e) {
+            var filter = e.target.value;
             this.renderList(filter);
         }
 

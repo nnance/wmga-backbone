@@ -76,8 +76,8 @@ define([
             this.handleErrors(model,{response: xhr.responseText});
         },
 
-        cancelButton: function() {
-            event.preventDefault();
+        cancelButton: function(e) {
+            e.preventDefault();
             history.back(1);
         },
 
@@ -85,8 +85,8 @@ define([
             return this.serializeForm('form');
         },
 
-        saveButton: function() {
-            event.preventDefault();
+        saveButton: function(e) {
+            e.preventDefault();
             this.removeSubViews();
             this.model.save(this.getFormData());
         },

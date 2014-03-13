@@ -59,8 +59,8 @@ define([
             }
         },
 
-        switchFilter: function() {
-            Backbone.history.navigate('#news/filter/' + event.target.id, true);
+        switchFilter: function(e) {
+            Backbone.history.navigate('#news/filter/' + e.target.id, true);
         }
     });
 

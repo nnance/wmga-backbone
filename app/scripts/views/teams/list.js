@@ -43,8 +43,8 @@ define([
             this.insertView(view.render(),'table');
         },
 
-        filterTeams: function() {
-            var filter = event.target.value;
+        filterTeams: function(e) {
+            var filter = e.target.value;
             this.renderList(filter);
         }
 

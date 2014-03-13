@@ -24,8 +24,8 @@ define([
             this.dataManager = options.dataManager;
         },
 
-        nextStep: function() {
-            event.preventDefault();
+        nextStep: function(e) {
+            e.preventDefault();
             this.model.set(this.serializeForm('form'));
 
             this.session.validateAccount(this.model.get('email'), this.model.get('password'))
@@ -49,8 +49,8 @@ define([
             },this));
         },
 
-        sendPasswordEmail: function() {
-            event.preventDefault();
+        sendPasswordEmail: function(e) {
+            e.preventDefault();
             var passwordEmail = new RequestPassword({email: this.model.get('email')});
             passwordEmail.save()
             .done(_.bind(function() {

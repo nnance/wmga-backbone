@@ -83,28 +83,28 @@ define([
             view.show();
         },
 
-        setPaid: function() {
-            event.preventDefault();
-            this.model.save({paid: event.target.checked});
+        setPaid: function(e) {
+            e.preventDefault();
+            this.model.save({paid: e.target.checked});
         },
 
-        setAdmin: function() {
-            event.preventDefault();
-            this.model.save({admin: event.target.checked});
+        setAdmin: function(e) {
+            e.preventDefault();
+            this.model.save({admin: e.target.checked});
         },
 
-        setTreasure: function() {
-            event.preventDefault();
-            this.model.save({treasure: event.target.checked});
+        setTreasure: function(e) {
+            e.preventDefault();
+            this.model.save({treasure: e.target.checked});
         },
 
-        registerTeam: function() {
-            event.preventDefault();
+        registerTeam: function(e) {
+            e.preventDefault();
             Backbone.history.navigate('#teams/create',true);
         },
 
-        manageTeam: function() {
-            event.preventDefault();
+        manageTeam: function(e) {
+            e.preventDefault();
             Backbone.history.navigate('#teams/read/' + this.model.get('teamid'),true);
         }
     });

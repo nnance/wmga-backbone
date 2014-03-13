@@ -22,8 +22,8 @@ define([
             this.dataManager = options.dataManager;
         },
 
-        nextStep: function() {
-            event.preventDefault();
+        nextStep: function(e) {
+            e.preventDefault();
 
             this.removeSubViews();
             var formData = this.serializeForm('form');
@@ -38,8 +38,8 @@ define([
             }
         },
 
-        createStep: function() {
-            event.preventDefault();
+        createStep: function(e) {
+            e.preventDefault();
             Backbone.history.navigate('#signup/email', true);
         },
 

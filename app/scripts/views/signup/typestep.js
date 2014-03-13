@@ -16,8 +16,8 @@ define([
             'click .btn': 'nextStep'
         },
 
-        nextStep: function() {
-            event.preventDefault();
+        nextStep: function(e) {
+            e.preventDefault();
             this.model.set(this.serializeForm('form'));
             if (this.model.get('existingMember') === 'yes') {
                 Backbone.history.navigate('#signup/email', true);
