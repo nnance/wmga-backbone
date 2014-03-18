@@ -14,7 +14,6 @@ define([
     var HomeIndexView = BaseView.extend({
 
         template: JST['app/scripts/templates/home/index.ejs'],
-        signUpTemplate: JST['app/scripts/templates/home/signupbutton.ejs'],
 
         initialize: function(options) {
             this.newsCollection = options.newsCol;
@@ -27,9 +26,6 @@ define([
 
         render: function() {
             BaseView.prototype.render.apply(this,arguments);
-            // if (this.session.get('admin') || this.showSignUp) {
-                this.$('#jumbotron').append(this.signUpTemplate(this));
-            // }
             this.renderNews();
             this.renderEvent();
             return this;

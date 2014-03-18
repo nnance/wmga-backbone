@@ -24,7 +24,7 @@ define([
             this.sessionCollection = new SessionCollection();
 
             this.header = new HeaderView({collection: this.sessionCollection});
-            this.container = new BaseView();
+            this.container = new BaseView({className: 'container'});
             this.footer = new FooterView();
 
             this.listenTo(Backbone.history,'route',this.updateTracking);

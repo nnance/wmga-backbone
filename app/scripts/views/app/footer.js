@@ -11,6 +11,7 @@ define([
 
     var FooterView = BaseView.extend({
         template: JST['app/scripts/templates/app/footer.ejs'],
+        className: 'container'
     });
 
     return FooterView;
