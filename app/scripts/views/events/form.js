@@ -19,10 +19,10 @@ define([
             FormBaseView.prototype.render.apply(this,arguments);
 
             this.$('#startdatepicker').datetimepicker({
-                pickTime: false
+                pickSeconds: false
             });
             this.$('#enddatepicker').datetimepicker({
-                pickTime: false
+                pickSeconds: false
             });
             this.filestyle({
                 selector: '#attachedfile',
