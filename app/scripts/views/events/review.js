@@ -20,7 +20,7 @@ define([
         },
 
         getFileUrl: function() {
-            return AppSettings.getBaseURL() + '/attachments/' + this.model.get('attachedfile');
+            return AppSettings.getBaseURL() + '/files/' + this.model.get('attachedfile');
         },
 
         showDeleteConfirm: function() {

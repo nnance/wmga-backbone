@@ -97,7 +97,7 @@ define([
             }
 
             if (this.filestyleHasFiles()) {
-                this.filestyleUpload();
+                this.sendFile(_.bind(this.routeSuccessfulResult,this));
             } else {
                 this.routeSuccessfulResult();
             }
