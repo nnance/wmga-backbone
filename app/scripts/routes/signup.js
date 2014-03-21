@@ -46,7 +46,6 @@ define([
                 Backbone.history.navigate('#signup', true);
             } else {
                 if (step === 'welcome') {
-                    this.session.signout();
                     this.model = new UserModel();
                     this.container.setView(this.indexView.render());
                 }
