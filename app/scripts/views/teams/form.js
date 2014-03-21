@@ -88,7 +88,7 @@ define([
                 promises.push(member.save({teamid: this.model.id}));
             },this);
 
-            $.when(promises)
+            $.when.apply($, promises)
             .done(_.bind(function(){
                 var route = this.returnHash ? this.returnHash : '#teams/read/' + this.model.id;
                 Backbone.history.navigate(route, true);

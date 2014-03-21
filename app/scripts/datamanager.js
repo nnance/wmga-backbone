@@ -27,47 +27,26 @@ define([
             this.teamCollection = new Teams();
         },
 
-        getLoadOptions: function() {
-            return {
-                success: _.bind(this.loadCompleted,this),
-                failure: _.bind(this.loadCompleted,this)
-            };
-        },
-
         loadData: function(callback) {
-            var options = this.getLoadOptions();
             var deferreds = [
-                this.eventsCollection.fetch(options),
-                this.newsCollection.fetch(options),
-                this.resultsCollection.fetch(options)
+                this.eventsCollection.fetch(),
+                this.newsCollection.fetch(),
+                this.resultsCollection.fetch()
             ]
             if (this.session.get('signedin')) {
-                deferreds.push(this.userCollection.fetch(options));
-                deferreds.push(this.teamCollection.fetch(options));
+                deferreds.push(this.userCollection.fetch());
+                deferreds.push(this.teamCollection.fetch());
             }
-            this.initiateLoad(deferreds, callback);
+            $.when.apply($,deferreds).done(callback);
             return deferreds;
         },
 
-        initiateLoad: function(deferreds, callback) {
-            this.loadCount = deferreds.length;
-            this.loadCallback = callback;
-        },
-
-        loadCompleted: function() {
-            this.loadCount = this.loadCount - 1;
-            if (this.loadCount === 0) {
-                this.loadCallback.call(this);
-            }
-        },
-
         loadSecureData: function(callback) {
-            var options = this.getLoadOptions();
             var deferreds = [
-                this.userCollection.fetch(options),
-                this.teamCollection.fetch(options)
+                this.userCollection.fetch(),
+                this.teamCollection.fetch()
             ];
-            this.initiateLoad(deferreds, callback);
+            $.when.apply($,deferreds).done(callback);
             return deferreds;
         }
     });
