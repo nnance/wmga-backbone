@@ -41,6 +41,12 @@ define([
 
         renderEvent: function() {
             var recentEvent = this.eventsCollection.at(0);
+            var now = moment();
+            this.eventsCollection.forEach(function(event) {
+                if (event.getAsDate('startdate').isAfter(now)) {
+                    recentEvent = event;
+                }
+            }, this);
             if (recentEvent) {
                 var eventsView = new EventsItemView({model: recentEvent});
                 this.insertView(eventsView.render(), '#events-item');
