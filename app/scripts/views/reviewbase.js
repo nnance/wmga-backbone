@@ -13,12 +13,19 @@ define([
 
     var ReviewBaseView = BaseView.extend({
 
-        render: function(options) {
+        initialize: function(options) {
+            BaseView.prototype.initialize.apply(this,arguments);
+            if (this.model) {
+                this.listenTo(this.model,'change',this.render);
+            }
+
+        },
+
+        render: function() {
             BaseView.prototype.render.apply(this, arguments);
             if (this.editButtonsTemplate && this.session && this.session.get('admin')) {
                 this.$('.btn-toolbar').append(this.editButtonsTemplate(this));
             }
-            this.listenTo(this.model,'change',this.render);
             return this;
         },
 
