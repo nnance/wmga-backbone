@@ -14,7 +14,7 @@ define([
         model: UserModel,
 
         comparator: function (a) {
-            return a.getFullName();
+            return a.getFullName().toLowerCase();
         }
     });
 
