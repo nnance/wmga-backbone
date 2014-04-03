@@ -44,6 +44,7 @@ define([
         handleErrors: function(model, errors) {
             // restore the model
             model.set(model.previousAttributes());
+            this.delegateEvents();
             this.showErrors(errors);
         },
 
@@ -87,6 +88,8 @@ define([
 
         saveButton: function(e) {
             e.preventDefault();
+            $(e.target).text('saving...');
+            this.undelegateEvents();
             this.removeSubViews();
             this.model.save(this.getFormData());
         },
@@ -99,11 +102,13 @@ define([
             if (this.filestyleHasFiles()) {
                 this.sendFile(_.bind(this.routeSuccessfulResult,this));
             } else {
+                this.delegateEvents();
                 this.routeSuccessfulResult();
             }
         },
 
         fileuploadCompleted: function() {
+            this.delegateEvents();
             this.routeSuccessfulResult();
         },
 
