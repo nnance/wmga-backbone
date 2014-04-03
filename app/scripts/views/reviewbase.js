@@ -30,7 +30,7 @@ define([
         },
 
         getFileUrl: function() {
-            return AppSettings.getBaseURL() + '/files/' + this.model.get('attachedfile');
+            return AppSettings.fileURL + this.model.get('attachedfile');
         },
 
     });

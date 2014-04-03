@@ -19,10 +19,6 @@ define([
             'click #delete-btn': 'showDeleteConfirm',
         },
 
-        getFileUrl: function() {
-            return AppSettings.getBaseURL() + '/files/' + this.model.get('attachedfile');
-        },
-
         showDeleteConfirm: function() {
             var view = new DeleteView({
                 model: this.model,

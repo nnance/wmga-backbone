@@ -65,7 +65,7 @@ define([
         },
 
         getFileUrl: function() {
-            return AppSettings.getBaseURL() + '/files/' + this.model.get('photo');
+            return AppSettings.fileURL + this.model.get('photo');
         },
 
         getPayNow: function() {
