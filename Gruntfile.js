@@ -266,7 +266,6 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.{webp,gif}',
                         'styles/fonts/{,*/}*.*',
-                        'files/{,*/}*.*',
                         'bower_components/sass-bootstrap/fonts/*.*',
                         'bower_components/bootstrap3-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
                         'bower_components/select2/select2.css',
